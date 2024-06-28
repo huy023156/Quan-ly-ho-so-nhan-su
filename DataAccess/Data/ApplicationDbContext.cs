@@ -10,9 +10,9 @@ namespace DataAccess.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<ChucDanh> ChucDanhTable { get; set; }
@@ -21,9 +21,10 @@ namespace DataAccess.Data
         {
             modelBuilder.Entity<ChucDanh>().HasData(
                 new ChucDanh { Id = 1, Name = "Giám đốc trung tâm" },
-                new ChucDanh { Id = 2, Name = "Phó giám đốc trung tâm"},
-                new ChucDanh { Id = 3, Name = "Leader"},
-                new ChucDanh { Id = 4, Name = "Nhân viên"}
+                new ChucDanh { Id = 2, Name = "Phó giám đốc trung tâm" },
+                new ChucDanh { Id = 3, Name = "Leader" },
+                new ChucDanh { Id = 4, Name = "Nhân viên" }
                 );
         }
+    }
 }
