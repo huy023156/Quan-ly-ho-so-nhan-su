@@ -1,0 +1,32 @@
+﻿@model List<TinhThanh>
+
+<div class="card shadow border-0 mt-5">
+    <div class="card-header bg-primary bg-gradient ml-0 py-3">
+        <div class="col-12 text-center">
+            <h2 class="text-white-50 py-2">Danh sách tỉnh thành</h2>
+        </div>
+    </div>
+    <div class="card-body shadow p-4">
+        <div class="row pb-3">
+            @* <div class="col-6"></div> *@
+            <div class="col-12 text-end">
+                <a asp-controller="TinhThanh" asp-action="Upsert" class="btn btn-primary">
+                    <i class="bi bi-plus-square"></i> Tạo tỉnh thành mới
+                </a>
+            </div>
+        </div>
+        <table id="tblData" class="table table-bordered table-striped compact">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Quốc Gia</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/tinhThanh.js"></script>
+}

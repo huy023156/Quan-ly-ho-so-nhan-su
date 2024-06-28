@@ -1,0 +1,51 @@
+﻿@model QuanHuyenVM
+
+<div class="card shadow border-0 mt-5">
+	<div class="card-header bg-primary bg-gradient ml-0 py-3">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h2 class="text-white-50 py-2">@(Model.QuanHuyen.Id == 0 ? "Thêm" : "Sửa") quận huyện</h2>
+			</div>
+		</div>
+	</div>
+	<div class="card-body p-4">
+		<form method="post" class="row">
+			<input asp-for="QuanHuyen.Id" hidden />
+			@* <span asp-validation-sumary="ModelOnly"></span> *@
+
+			<div class="border p-3">
+				<div class="form-floating col-12 py-2">
+					<input asp-for="QuanHuyen.Name" class="form-control border-0 shadow" />
+					<label asp-for="QuanHuyen.Name" class="ms-2"></label>
+					<span asp-validation-for="QuanHuyen.Name" class="text-danger"></span>
+				</div>
+				<div class="form-floating col-12 py-2">
+					<select asp-items="Model.TinhThanhList" asp-for="QuanHuyen.TinhThanhId" class="form-select border-0 shadow">
+						<option disabled selected>--Select Category--</option>
+					</select>
+					<label asp-for="QuanHuyen.TinhThanhId" class="ms-2"></label>
+					<span asp-validation-for="QuanHuyen.TinhThanhId" class="text-danger"></span>
+				</div>
+				<div class="row pt-2">
+					<div class="col-6 col-md-3">
+						<button type="submit" class="btn btn-primary form-control">@(Model.QuanHuyen.Id == 0 ? "Thêm" : "Sửa")</button>
+
+					</div>
+					<div class="col-6 col-md-3">
+						<a asp-controller="QuanHuyen" asp-action="Index" class="btn btn-outline-secondary form-control">
+							Quay lại
+						</a>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial"></partial>
+	}
+}
+
