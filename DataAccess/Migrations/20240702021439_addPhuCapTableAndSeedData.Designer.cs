@@ -3,6 +3,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240702021439_addPhuCapTableAndSeedData")]
+    partial class addPhuCapTableAndSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,50 +23,6 @@ namespace DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("Models.CheDoPhucLoi", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CheDoPhucLoiTable");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Bảo hiểm y tế"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Bảo hiểm xã hội"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Bảo hiểm thất nghiệp"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Bảo hiểm tai nạn lao động, bệnh nghề nghiệp"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Hưu trí"
-                        });
-                });
 
             modelBuilder.Entity("Models.ChucDanh", b =>
                 {

@@ -22,6 +22,8 @@ namespace DataAccess.Data
         public DbSet<QuanHuyen> QuanHuyenTable { get; set; }
         public DbSet<XaPhuong> XaPhuongTable { get; set; }
         public DbSet<TaiSanCapPhat> TaiSanCapPhatTable { get; set; }
+        public DbSet<PhuCap> PhuCapTable { get; set; }
+        public DbSet<CheDoPhucLoi> CheDoPhucLoiTable { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -77,6 +79,22 @@ namespace DataAccess.Data
                 new TaiSanCapPhat { Id = 3, Name = "Bàn phím"},
                 new TaiSanCapPhat { Id = 4, Name = "Ổ cứng"}
                 );
+
+            modelBuilder.Entity<PhuCap>().HasData(
+                new PhuCap { Id = 1, Name = "Bảo hiểm y tế"},
+                new PhuCap { Id = 2, Name = "Bảo hiểm xã hội"},
+                new PhuCap { Id = 3, Name = "Bảo hiểm thất nghiệp"},
+                new PhuCap { Id = 4, Name = "Bảo hiểm tai nạn lao động, bệnh nghề nghiệp"},
+				new PhuCap { Id = 5, Name = "Hưu trí"}
+				);
+
+            modelBuilder.Entity<CheDoPhucLoi>().HasData(
+                new CheDoPhucLoi { Id = 1, Name = "Bảo hiểm y tế" },
+				new CheDoPhucLoi { Id = 2, Name = "Bảo hiểm xã hội" },
+				new CheDoPhucLoi { Id = 3, Name = "Bảo hiểm thất nghiệp" },
+				new CheDoPhucLoi { Id = 4, Name = "Bảo hiểm tai nạn lao động, bệnh nghề nghiệp" },
+				new CheDoPhucLoi { Id = 5, Name = "Hưu trí" }
+				);
         }
     }
 }

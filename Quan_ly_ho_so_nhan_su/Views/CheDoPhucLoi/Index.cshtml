@@ -1,17 +1,17 @@
-﻿@model List<TaiSanCapPhat>
+﻿@model List<CheDoPhucLoi>
 
 <div class="card shadow border-0 mt-5">
     <div class="card-header bg-primary bg-gradient ml-0 py-3">
         <div class="col-12 text-center">
-            <h2 class="text-white-50 py-2">Danh sách tài sản cấp phát</h2>
+            <h2 class="text-white-50 py-2">Danh sách chế độ phúc lợi</h2>
         </div>
     </div>
     <div class="card-body shadow p-4">
         <div class="row pb-3">
             @* <div class="col-6"></div> *@
             <div class="col-12 text-end">
-                <a asp-controller="TaiSanCapPhat" asp-action="Upsert" class="btn btn-primary">
-                    <i class="bi bi-plus-square"></i> Tạo tài sản cấp phát mới
+                <a asp-controller="CheDoPhucLoi" asp-action="Upsert" class="btn btn-primary">
+                    <i class="bi bi-plus-square"></i> Tạo danh mục chế độ phúc lợi mới
                 </a>
             </div>
         </div>
@@ -27,5 +27,5 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/taiSanCapPhat.js"></script>
+    <script src="~/js/cheDoPhucLoi.js"></script>
 }
