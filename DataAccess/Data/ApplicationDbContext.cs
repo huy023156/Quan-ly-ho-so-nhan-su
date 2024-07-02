@@ -21,6 +21,7 @@ namespace DataAccess.Data
         public DbSet<TinhThanh> TinhThanhTable { get; set; }
         public DbSet<QuanHuyen> QuanHuyenTable { get; set; }
         public DbSet<XaPhuong> XaPhuongTable { get; set; }
+        public DbSet<TaiSanCapPhat> TaiSanCapPhatTable { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -68,6 +69,13 @@ namespace DataAccess.Data
                 new XaPhuong { Id = 5, Name = "Mỹ Khê", QuanHuyenId = 5 },
                 new XaPhuong { Id = 6, Name = "Tân Định", QuanHuyenId = 6 },
                 new XaPhuong { Id = 7, Name = "Yên Hòa", QuanHuyenId = 4 }
+                );
+
+            modelBuilder.Entity<TaiSanCapPhat>().HasData(
+                new TaiSanCapPhat { Id = 1, Name = "Máy tính" },
+                new TaiSanCapPhat { Id = 2, Name = "Chuột"},
+                new TaiSanCapPhat { Id = 3, Name = "Bàn phím"},
+                new TaiSanCapPhat { Id = 4, Name = "Ổ cứng"}
                 );
         }
     }

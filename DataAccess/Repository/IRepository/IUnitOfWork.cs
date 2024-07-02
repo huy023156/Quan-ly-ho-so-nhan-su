@@ -14,6 +14,7 @@ namespace DataAccess.Repository.IRepository
         public ITinhThanhRepository TinhThanhTable { get; }
         public IQuanHuyenRepository QuanHuyenTable { get; }
         public IXaPhuongRepository XaPhuongTable { get; }
+        public ITaiSanCapPhatRepository TaiSanCapPhatTable { get; }
 
         void Save();
     }
