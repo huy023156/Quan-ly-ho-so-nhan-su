@@ -24,7 +24,8 @@ namespace DataAccess.Data
         public DbSet<TaiSanCapPhat> TaiSanCapPhatTable { get; set; }
         public DbSet<PhuCap> PhuCapTable { get; set; }
         public DbSet<CheDoPhucLoi> CheDoPhucLoiTable { get; set; }
-
+        public DbSet<NganHang> NganHangTable { get; set; }
+        public DbSet<ChiNhanhNganHang> ChiNhanhNganHangTable { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ChucDanh>().HasData(
@@ -95,6 +96,22 @@ namespace DataAccess.Data
 				new CheDoPhucLoi { Id = 4, Name = "Bảo hiểm tai nạn lao động, bệnh nghề nghiệp" },
 				new CheDoPhucLoi { Id = 5, Name = "Hưu trí" }
 				);
+
+            modelBuilder.Entity<NganHang>().HasData(
+                new NganHang { Id = 1, Name = "MB Bank"},
+                new NganHang { Id = 2, Name = "VP Bank"},
+				new NganHang { Id = 3, Name = "Techcombank" },
+				new NganHang { Id = 4, Name = "Viettinbank" }
+				);
+
+            modelBuilder.Entity<ChiNhanhNganHang>().HasData(
+                new ChiNhanhNganHang 
+                { Id = 1, NganHangId = 1, DiaChi = "12 đường Lê Trọng Tấn", XaPhuongId = 1},
+                new ChiNhanhNganHang 
+                { Id = 2, NganHangId = 2, DiaChi = "69 đường Tôn Thất Thuyết", XaPhuongId = 4}
+                );
+
+
         }
     }
 }

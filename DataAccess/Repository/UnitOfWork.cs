@@ -20,6 +20,8 @@ namespace DataAccess.Repository
         public ITaiSanCapPhatRepository TaiSanCapPhatTable { get; private set; }
         public IPhuCapRepository PhuCapTable { get; private set; }
         public ICheDoPhucLoiRepository CheDoPhucLoiTable { get; private set; }
+        public INganHangRepository NganHangTable { get; private set; }
+        public IChiNhanhNganHangRepository ChiNhanhNganHangTable { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -34,6 +36,8 @@ namespace DataAccess.Repository
             TaiSanCapPhatTable = new TaiSanCapPhatRepository(db);
             PhuCapTable = new PhuCapRepository(db);
             CheDoPhucLoiTable = new CheDoPhucLoiRepository(db);
+            NganHangTable = new NganHangRepository(db);
+            ChiNhanhNganHangTable = new ChiNhanhNganHangRepository(db);
         }
 
         public void Save()

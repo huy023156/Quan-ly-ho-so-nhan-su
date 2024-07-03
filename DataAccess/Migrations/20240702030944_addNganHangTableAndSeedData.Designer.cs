@@ -3,6 +3,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240702030944_addNganHangTableAndSeedData")]
+    partial class addNganHangTableAndSeedData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,49 +65,6 @@ namespace DataAccess.Migrations
                         {
                             Id = 5,
                             Name = "Hưu trí"
-                        });
-                });
-
-            modelBuilder.Entity("Models.ChiNhanhNganHang", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("DiaChi")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NganHangId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("XaPhuongId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NganHangId");
-
-                    b.HasIndex("XaPhuongId");
-
-                    b.ToTable("ChiNhanhNganHangTable");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DiaChi = "12 đường Lê Trọng Tấn",
-                            NganHangId = 1,
-                            XaPhuongId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DiaChi = "69 đường Tôn Thất Thuyết",
-                            NganHangId = 2,
-                            XaPhuongId = 4
                         });
                 });
 
@@ -519,25 +479,6 @@ namespace DataAccess.Migrations
                             Name = "Yên Hòa",
                             QuanHuyenId = 4
                         });
-                });
-
-            modelBuilder.Entity("Models.ChiNhanhNganHang", b =>
-                {
-                    b.HasOne("Models.NganHang", "NganHang")
-                        .WithMany()
-                        .HasForeignKey("NganHangId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Models.XaPhuong", "XaPhuong")
-                        .WithMany()
-                        .HasForeignKey("XaPhuongId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("NganHang");
-
-                    b.Navigation("XaPhuong");
                 });
 
             modelBuilder.Entity("Models.QuanHuyen", b =>
