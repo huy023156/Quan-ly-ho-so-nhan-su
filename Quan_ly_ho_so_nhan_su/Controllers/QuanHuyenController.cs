@@ -27,7 +27,7 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 			QuanHuyenVM quanHuyenVM = new QuanHuyenVM
 			{
 				QuanHuyen = new QuanHuyen(),
-				TinhThanhList = _unitOfWork.TinhThanhTable.GetAll().Select(q => new SelectListItem
+				QuocGiaList = _unitOfWork.QuocGiaTable.GetAll().Select(q => new SelectListItem
 				{
 					Text = q.Name,
 					Value = q.Id.ToString()
@@ -42,6 +42,22 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 			else
 			{
 				quanHuyenVM.QuanHuyen = _unitOfWork.QuanHuyenTable.Get(u => u.Id == id);
+				TinhThanh tinhThanh = _unitOfWork.TinhThanhTable.Get(u => u.Id == quanHuyenVM.QuanHuyen.TinhThanhId);
+				quanHuyenVM.QuocGiaId = tinhThanh.QuocGiaId;
+
+				quanHuyenVM.TinhThanhList = _unitOfWork.TinhThanhTable.GetAll(u => u.Id == quanHuyenVM.QuanHuyen.TinhThanhId).Select(
+					t => new SelectListItem
+					{
+						Text = t.Name,
+						Value = t.Id.ToString()
+					});
+
+				quanHuyenVM.QuocGiaList = _unitOfWork.QuocGiaTable.GetAll().Select(
+					q => new SelectListItem
+					{
+						Text = q.Name,
+						Value = q.Id.ToString()
+					});
 			}
 
 			return View(quanHuyenVM);
@@ -68,10 +84,10 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 			}
 			else
 			{
-				quanHuyenVM.TinhThanhList = _unitOfWork.TinhThanhTable.GetAll().Select(q => new SelectListItem
+				quanHuyenVM.QuocGiaList = _unitOfWork.QuocGiaTable.GetAll().Select(q => new SelectListItem
 				{
-					Text = q.Name,
-					Value = q.Id.ToString()
+					Value = q.Id.ToString(),
+					Text = q.Name
 				});
 			}
 

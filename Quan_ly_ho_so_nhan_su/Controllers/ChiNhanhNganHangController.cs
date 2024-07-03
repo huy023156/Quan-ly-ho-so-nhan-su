@@ -44,21 +44,19 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
             else
             {
 				chiNhanhNganHangVM.ChiNhanhNganHang = _unitOfWork.ChiNhanhNganHangTable.Get(u => u.Id == id, includeProperties: "XaPhuong");
-                chiNhanhNganHangVM.QuanHuyen = _unitOfWork.QuanHuyenTable.Get(u => u.Id == chiNhanhNganHangVM.ChiNhanhNganHang.XaPhuong.QuanHuyenId, includeProperties: "TinhThanh");
-                chiNhanhNganHangVM.QuanHuyenId = chiNhanhNganHangVM.QuanHuyen.Id;
-                chiNhanhNganHangVM.XaPhuongList = _unitOfWork.XaPhuongTable.GetAll(u => u.QuanHuyenId == chiNhanhNganHangVM.QuanHuyenId).Select(
-                    u => new SelectListItem { Value = u.Id.ToString(), Text = u.Name }
-                    );
+                QuanHuyen quanHuyen = _unitOfWork.QuanHuyenTable.Get(u => u.Id == chiNhanhNganHangVM.ChiNhanhNganHang.XaPhuong.QuanHuyenId);
+                TinhThanh tinhThanh = _unitOfWork.TinhThanhTable.Get(u => u.Id == quanHuyen.TinhThanhId);
+                chiNhanhNganHangVM.QuanHuyenId = quanHuyen.Id;
+				chiNhanhNganHangVM.TinhThanhId = tinhThanh.Id;
+                chiNhanhNganHangVM.QuocGiaId = tinhThanh.QuocGiaId;
 
-                chiNhanhNganHangVM.TinhThanh = _unitOfWork.TinhThanhTable.Get(u => u.Id == chiNhanhNganHangVM.QuanHuyen.TinhThanhId, includeProperties: "QuocGia");
-                chiNhanhNganHangVM.TinhThanhId = chiNhanhNganHangVM.TinhThanh.Id;
-                chiNhanhNganHangVM.QuanHuyenList = _unitOfWork.QuanHuyenTable.GetAll(u => u.TinhThanhId == chiNhanhNganHangVM.TinhThanhId).Select(
-                    u => new SelectListItem { Value = u.Id.ToString(), Text = u.Name }
-                    );
-
-                chiNhanhNganHangVM.QuocGia = _unitOfWork.QuocGiaTable.Get(u => u.Id == chiNhanhNganHangVM.TinhThanh.QuocGiaId);
-                chiNhanhNganHangVM.QuocGiaId = chiNhanhNganHangVM.QuocGia.Id;
-                chiNhanhNganHangVM.TinhThanhList = _unitOfWork.TinhThanhTable.GetAll(u => u.QuocGiaId == chiNhanhNganHangVM.QuocGiaId).Select(
+				chiNhanhNganHangVM.XaPhuongList = _unitOfWork.XaPhuongTable.GetAll(u => u.QuanHuyenId == chiNhanhNganHangVM.QuanHuyenId).Select(
+	                u => new SelectListItem { Value = u.Id.ToString(), Text = u.Name }
+	                );
+				chiNhanhNganHangVM.QuanHuyenList = _unitOfWork.QuanHuyenTable.GetAll(u => u.TinhThanhId == tinhThanh.Id).Select(
+	                u => new SelectListItem { Value = u.Id.ToString(), Text = u.Name }
+	                );
+				chiNhanhNganHangVM.TinhThanhList = _unitOfWork.TinhThanhTable.GetAll(u => u.QuocGiaId == chiNhanhNganHangVM.QuocGiaId).Select(
                     u => new SelectListItem { Value = u.Id.ToString(), Text = u.Name }
                     );
             }

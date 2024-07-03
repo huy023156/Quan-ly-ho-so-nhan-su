@@ -63,7 +63,7 @@
                 success: function (response) {
                     $('#QuanHuyenId').empty().append($('<option>', {
                         value: '',
-                        text: '--select--',
+                        text: '--Select Quận Huyện--',
                         disabled: true,
                         selected: true
                     })).prop('disabled', false);
@@ -84,7 +84,7 @@
         } else {
             $('#QuanHuyenId').empty().append($('<option>', {
                 value: '',
-                text: '--select--',
+                text: '--Select Quận Huyện--',
                 disabled: true,
                 selected: true
             })).prop('disabled', true);

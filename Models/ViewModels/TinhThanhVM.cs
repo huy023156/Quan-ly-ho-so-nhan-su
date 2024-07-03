@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Models.ViewModels
     public class TinhThanhVM
     {
         public TinhThanh TinhThanh { get; set; }
+
         [ValidateNever]
         public IEnumerable<SelectListItem> QuocGiaList { get; set; }
     }

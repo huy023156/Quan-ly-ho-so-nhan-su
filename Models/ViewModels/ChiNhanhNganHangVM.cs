@@ -14,17 +14,8 @@ namespace Models.ViewModels
         public ChiNhanhNganHang ChiNhanhNganHang { get; set; }
 
         public int QuocGiaId { get; set; }
-        [ForeignKey(nameof(QuocGiaId))]
-        [ValidateNever]
-        public QuocGia QuocGia { get; set; }
         public int TinhThanhId { get; set; }
-        [ForeignKey(nameof(TinhThanhId))]
-        [ValidateNever]
-        public TinhThanh TinhThanh { get; set; }
         public int QuanHuyenId { get; set; }
-        [ForeignKey(nameof(QuanHuyenId))]
-        [ValidateNever]
-        public QuanHuyen QuanHuyen { get; set; }
 
         [ValidateNever]
 		public IEnumerable<SelectListItem> NganHangList { get; set; }
