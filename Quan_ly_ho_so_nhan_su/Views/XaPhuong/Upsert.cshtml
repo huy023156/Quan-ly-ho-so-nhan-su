@@ -20,12 +20,46 @@
 					<span asp-validation-for="XaPhuong.Name" class="text-danger"></span>
 				</div>
 				<div class="form-floating col-12 py-2">
-					<select asp-items="Model.QuanHuyenList" asp-for="XaPhuong.QuanHuyenId" class="form-select border-0 shadow">
-						<option disabled selected>--Select Category--</option>
+					<select asp-items="Model.QuocGiaList" asp-for="QuocGiaId" class="form-select border-0 shadow">
+						<option disabled selected>--Select Quốc Gia--</option>
 					</select>
-					<label asp-for="XaPhuong.QuanHuyenId" class="ms-2"></label>
-					<span asp-validation-for="XaPhuong.QuanHuyenId" class="text-danger"></span>
+					<label asp-for="QuocGiaId" class="ms-2"></label>
+					<span asp-validation-for="QuocGiaId" class="text-danger"></span>
 				</div>
+				@if (Model.XaPhuong.Id == 0)
+				{
+					<div class="form-floating col-12 py-2">
+						<select disabled asp-for="TinhThanhId" class="form-select border-0 shadow">
+							<option disabled selected>--Select Tỉnh Thành--</option>
+						</select>
+						<label asp-for="TinhThanhId" class="ms-2"></label>
+						<span asp-validation-for="TinhThanhId" class="text-danger"></span>
+					</div>
+					<div class="form-floating col-12 py-2">
+						<select disabled asp-for="XaPhuong.QuanHuyenId" class="form-select border-0 shadow">
+							<option disabled selected>--Select Quận Huyện--</option>
+						</select>
+						<label asp-for="XaPhuong.QuanHuyenId" class="ms-2"></label>
+						<span asp-validation-for="XaPhuong.QuanHuyenId" class="text-danger"></span>
+					</div>
+				}
+				else
+				{
+					<div class="form-floating col-12 py-2">
+						<select asp-items="Model.TinhThanhList" asp-for="TinhThanhId" class="form-select border-0 shadow">
+							<option disabled selected>--Select Tỉnh Thành--</option>
+						</select>
+						<label asp-for="TinhThanhId" class="ms-2"></label>
+						<span asp-validation-for="TinhThanhId" class="text-danger"></span>
+					</div>
+					<div class="form-floating col-12 py-2">
+						<select asp-items="Model.QuanHuyenList" asp-for="XaPhuong.QuanHuyenId" class="form-select border-0 shadow">
+							<option disabled selected>--Select Quận Huyện--</option>
+						</select>
+						<label asp-for="XaPhuong.QuanHuyenId" class="ms-2"></label>
+						<span asp-validation-for="XaPhuong.QuanHuyenId" class="text-danger"></span>
+					</div>
+				}
 				<div class="row pt-2">
 					<div class="col-6 col-md-3">
 						<button type="submit" class="btn btn-primary form-control">@(Model.XaPhuong.Id == 0 ? "Thêm" : "Sửa")</button>
@@ -47,5 +81,7 @@
 	@{
 		<partial name="_ValidationScriptsPartial"></partial>
 	}
+
+	<script src="~/js/xaPhuongUpsert.js"></script>
 }
 

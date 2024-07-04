@@ -45,7 +45,7 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 				TinhThanh tinhThanh = _unitOfWork.TinhThanhTable.Get(u => u.Id == quanHuyenVM.QuanHuyen.TinhThanhId);
 				quanHuyenVM.QuocGiaId = tinhThanh.QuocGiaId;
 
-				quanHuyenVM.TinhThanhList = _unitOfWork.TinhThanhTable.GetAll(u => u.Id == quanHuyenVM.QuanHuyen.TinhThanhId).Select(
+				quanHuyenVM.TinhThanhList = _unitOfWork.TinhThanhTable.GetAll(u => u.Id == tinhThanh.Id).Select(
 					t => new SelectListItem
 					{
 						Text = t.Name,

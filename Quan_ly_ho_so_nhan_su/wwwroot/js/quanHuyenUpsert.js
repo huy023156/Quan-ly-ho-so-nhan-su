@@ -29,5 +29,4 @@
             })).prop('disabled', true);
         }
     });
-
 });

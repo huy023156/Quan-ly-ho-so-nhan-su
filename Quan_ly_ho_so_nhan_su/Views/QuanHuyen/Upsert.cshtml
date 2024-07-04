@@ -21,7 +21,7 @@
 				</div>
 				<div class="form-floating col-12 py-2">
 					<select asp-items="Model.QuocGiaList" asp-for="QuocGiaId" class="form-select border-0 shadow">
-						<option disabled selected>--Select Category--</option>
+						<option disabled selected>--Select Quốc Gia--</option>
 					</select>
 					<label asp-for="QuocGiaId" class="ms-2"></label>
 					<span asp-validation-for="QuocGiaId" class="text-danger"></span>
@@ -30,7 +30,7 @@
 				{
 					<div class="form-floating col-12 py-2">
 						<select disabled asp-for="QuanHuyen.TinhThanhId" class="form-select border-0 shadow">
-							<option disabled selected>--Select Category--</option>
+							<option disabled selected>--Select Tỉnh Thành--</option>
 						</select>
 						<label asp-for="QuanHuyen.TinhThanhId" class="ms-2"></label>
 						<span asp-validation-for="QuanHuyen.TinhThanhId" class="text-danger"></span>
@@ -39,7 +39,7 @@
 				{
 					<div class="form-floating col-12 py-2">
 						<select asp-items="Model.TinhThanhList" asp-for="QuanHuyen.TinhThanhId" class="form-select border-0 shadow">
-							<option disabled selected>--Select Category--</option>
+							<option disabled selected>--Select Tỉnh Thành--</option>
 						</select>
 						<label asp-for="QuanHuyen.TinhThanhId" class="ms-2"></label>
 						<span asp-validation-for="QuanHuyen.TinhThanhId" class="text-danger"></span>
@@ -68,6 +68,6 @@
 		<partial name="_ValidationScriptsPartial"></partial>
 	}
 
-	<script src="~/js/tinhThanhUpsert.js"></script>
+	<script src="~/js/quanHuyenUpsert.js"></script>
 }
 

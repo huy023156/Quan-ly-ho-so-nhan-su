@@ -11,7 +11,16 @@ namespace Models.ViewModels
 	public class XaPhuongVM
 	{
 		public XaPhuong XaPhuong { get; set; }
+
+		public int TinhThanhId { get; set; }
+		public int QuocGiaId { get; set; }
+
 		[ValidateNever]
 		public IEnumerable<SelectListItem> QuanHuyenList { get; set; }
+		[ValidateNever]
+		public IEnumerable<SelectListItem> TinhThanhList { get; set; }
+		[ValidateNever]
+		public IEnumerable<SelectListItem> QuocGiaList { get; set; }
+
 	}
 }
