@@ -8,7 +8,15 @@ function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         "ajax": { url: 'PhongBan/GetAll' },
         "columns": [
-            { data: 'name', width: '50%'},
+            {
+                data: 'name',
+                "render": function (data, type, row) {
+                    return `<a href="/PhongBanChucDanh/Index/${row.id}" class="text-decoration-none">
+                                ${data} <i class="bi bi-eye"></i>
+                            </a>`;
+                },
+                width: '50%'
+            },
             {
                 data: 'isApplied',
                 "render": function (data) {
