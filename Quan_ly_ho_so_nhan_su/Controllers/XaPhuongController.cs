@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Models.ViewModels;
 using Models;
+using Utility;
 
 namespace Quan_ly_ho_so_nhan_su.Controllers
 {
@@ -17,7 +18,9 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 
 		public IActionResult Index()
 		{
-			List<XaPhuong> xaPhuongTable = _unitOfWork.XaPhuongTable.GetAll(includeProperties: "QuanHuyen").ToList();
+			List<XaPhuong> xaPhuongTable = _unitOfWork.XaPhuongTable.GetAll(includeProperties: "QuanHuyen").Where(x =>
+				UtilClass.AreDependenciesValid(x, _unitOfWork)
+			).ToList();
 
 			return View(xaPhuongTable);
 		}
@@ -109,9 +112,16 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 		[HttpGet]
 		public IActionResult GetAll()
 		{
-			List<XaPhuong> xaPhuongTable = _unitOfWork.XaPhuongTable.GetAll(includeProperties: "QuanHuyen").ToList();
+            List<XaPhuong> xaPhuongTable = _unitOfWork.XaPhuongTable.GetAll(includeProperties: "QuanHuyen").Where(x => {
+                if (x.QuanHuyen.IsApplied != true) return false;
+                var tinhThanh = _unitOfWork.TinhThanhTable.Get(t => t.Id == x.QuanHuyen.TinhThanhId, includeProperties: "QuocGia");
+                if (tinhThanh.IsApplied != true) return false;
+                if (tinhThanh.QuocGia.IsApplied != true) return false;
 
-			return Json(new { data = xaPhuongTable });
+                return true;
+            }).ToList();
+
+            return Json(new { data = xaPhuongTable });
 		}
 
 		[HttpDelete]
@@ -129,6 +139,21 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 			return Json(new { success = true, Message = "Delete successful" });
 		}
 
-		#endregion
-	}
+        [HttpPost]
+        public IActionResult ToggleApply(int id)
+        {
+            var xaPhuong = _unitOfWork.XaPhuongTable.Get(u => u.Id == id);
+            if (xaPhuong == null)
+            {
+                return Json(new { success = false, Message = "Không tìm thấy xã phường" });
+            }
+
+            xaPhuong.IsApplied = !xaPhuong.IsApplied;
+            _unitOfWork.XaPhuongTable.Update(xaPhuong);
+            _unitOfWork.Save();
+            return Json(new { success = true, Message = "Thay đổi trạng thái thành công" });
+        }
+
+        #endregion
+    }
 }

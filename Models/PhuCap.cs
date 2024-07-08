@@ -13,5 +13,7 @@ namespace Models
 		public int Id { get; set; }
 		[Required]
 		public string Name { get; set; }
-	}
+
+        public bool IsApplied { get; set; } = true;
+    }
 }

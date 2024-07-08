@@ -81,7 +81,22 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 			return Json(new { success = true, Message = "Delete successful" });
 		}
 
-		#endregion
-	}
+        [HttpPost]
+        public IActionResult ToggleApply(int id)
+        {
+            var phuCap = _unitOfWork.PhuCapTable.Get(u => u.Id == id);
+            if (phuCap == null)
+            {
+                return Json(new { success = false, Message = "Không tìm thấy phụ cấp" });
+            }
+
+            phuCap.IsApplied = !phuCap.IsApplied;
+            _unitOfWork.PhuCapTable.Update(phuCap);
+            _unitOfWork.Save();
+            return Json(new { success = true, Message = "Thay đổi trạng thái thành công" });
+        }
+
+        #endregion
+    }
 }
 

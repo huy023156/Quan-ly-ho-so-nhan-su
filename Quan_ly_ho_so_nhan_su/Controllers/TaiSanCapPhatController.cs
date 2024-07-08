@@ -81,6 +81,21 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
             return Json(new { success = true, Message = "Delete successful" });
         }
 
+        [HttpPost]
+        public IActionResult ToggleApply(int id)
+        {
+            var taiSanCapPhat = _unitOfWork.TaiSanCapPhatTable.Get(u => u.Id == id);
+            if (taiSanCapPhat == null)
+            {
+                return Json(new { success = false, Message = "Không tìm thấy tài sản cấp phát" });
+            }
+
+            taiSanCapPhat.IsApplied = !taiSanCapPhat.IsApplied;
+            _unitOfWork.TaiSanCapPhatTable.Update(taiSanCapPhat);
+            _unitOfWork.Save();
+            return Json(new { success = true, Message = "Thay đổi trạng thái thành công" });
+        }
+
         #endregion
     }
 }

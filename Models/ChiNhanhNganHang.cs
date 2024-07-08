@@ -31,5 +31,8 @@ namespace Models
         [ForeignKey(nameof(XaPhuongId))]
         [ValidateNever]
         public XaPhuong XaPhuong { get; set; }
+
+        public bool IsApplied { get; set; } = true;
+
     }
 }

@@ -81,6 +81,21 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
             return Json(new { success = true, Message = "Delete successful" });
         }
 
+        [HttpPost]
+        public IActionResult ToggleApply(int id)
+        {
+            var cheDoPhucLoi = _unitOfWork.CheDoPhucLoiTable.Get(u => u.Id == id);
+            if (cheDoPhucLoi == null)
+            {
+                return Json(new { success = false, Message = "Không tìm thấy chế độ phúc lợi" });
+            }
+
+            cheDoPhucLoi.IsApplied = !cheDoPhucLoi.IsApplied;
+            _unitOfWork.CheDoPhucLoiTable.Update(cheDoPhucLoi);
+            _unitOfWork.Save();
+            return Json(new { success = true, Message = "Thay đổi trạng thái thành công" });
+        }
+
         #endregion
     }
 }

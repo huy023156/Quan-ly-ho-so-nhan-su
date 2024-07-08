@@ -81,6 +81,20 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 			return Json(new { success = true, Message = "Delete successful" });
 		}
 
-		#endregion
-	}
+        public IActionResult ToggleApply(int id)
+        {
+            var nganHang = _unitOfWork.NganHangTable.Get(u => u.Id == id);
+            if (nganHang == null)
+            {
+                return Json(new { success = false, Message = "Không tìm thấy quận huyện" });
+            }
+
+            nganHang.IsApplied = !nganHang.IsApplied;
+            _unitOfWork.NganHangTable.Update(nganHang);
+            _unitOfWork.Save();
+            return Json(new { success = true, Message = "Thay đổi trạng thái thành công" });
+        }
+
+        #endregion
+    }
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Models;
 using Models.ViewModels;
+using Utility;
 
 namespace Quan_ly_ho_so_nhan_su.Controllers
 {
@@ -80,7 +81,9 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 		[HttpGet]
 		public IActionResult GetAll()
 		{
-            List<TinhThanh> tinhThanhTable = _unitOfWork.TinhThanhTable.GetAll(includeProperties: "QuocGia").ToList();
+			List<TinhThanh> tinhThanhTable = _unitOfWork.TinhThanhTable.GetAll(includeProperties: "QuocGia").Where(
+				t => UtilClass.AreDependenciesValid(t, _unitOfWork)
+			).ToList();
             return Json(new { data = tinhThanhTable });
 		}
 
@@ -99,6 +102,21 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 			return Json(new { success = true, Message = "Delete successful" });
 		}
 
-		#endregion
-	}
+        [HttpPost]
+        public IActionResult ToggleApply(int id)
+        {
+            var tinhThanh = _unitOfWork.TinhThanhTable.Get(u => u.Id == id);
+            if (tinhThanh == null)
+            {
+                return Json(new { success = false, Message = "Không tìm thấy tỉnh thành" });
+            }
+
+            tinhThanh.IsApplied = !tinhThanh.IsApplied;
+            _unitOfWork.TinhThanhTable.Update(tinhThanh);
+            _unitOfWork.Save();
+            return Json(new { success = true, Message = "Thay đổi trạng thái thành công" });
+        }
+
+        #endregion
+    }
 }

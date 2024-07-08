@@ -81,6 +81,21 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
             return Json(new { success = true, Message = "Delete successful" });
         }
 
+        [HttpPost]
+        public IActionResult ToggleApply(int id)
+        {
+            var quocGia = _unitOfWork.QuocGiaTable.Get(u => u.Id == id);
+            if (quocGia == null)
+            {
+                return Json(new { success = false, Message = "Không tìm thấy xã phường" });
+            }
+
+            quocGia.IsApplied = !quocGia.IsApplied;
+            _unitOfWork.QuocGiaTable.Update(quocGia);
+            _unitOfWork.Save();
+            return Json(new { success = true, Message = "Thay đổi trạng thái thành công" });
+        }
+
         #endregion
     }
 }

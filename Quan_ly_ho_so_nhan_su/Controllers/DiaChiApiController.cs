@@ -17,8 +17,7 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 		[HttpGet]
 		public IActionResult GetTinhThanhListByQuocGiaId(int id)
 		{
-			var tinhThanhList = _unitOfWork.TinhThanhTable.GetAll()
-				.Where(t => t.QuocGiaId == id)
+			var tinhThanhList = _unitOfWork.TinhThanhTable.GetAll(t => t.QuocGiaId == id)
 				.Select(t => new { t.Id, t.Name })
 				.ToList();
 
@@ -28,8 +27,7 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 		[HttpGet]
 		public IActionResult GetQuanHuyenListByTinhThanhId(int id)
 		{
-			var quanHuyenList = _unitOfWork.QuanHuyenTable.GetAll()
-				.Where(q => q.TinhThanhId == id)
+			var quanHuyenList = _unitOfWork.QuanHuyenTable.GetAll(q => q.TinhThanhId == id)
 				.Select(q => new { q.Id, q.Name })
 				.ToList();
 
@@ -39,8 +37,7 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
 		[HttpGet]
 		public IActionResult GetXaPhuongListByQuanHuyenId(int id)
 		{
-			var xaPhuongList = _unitOfWork.XaPhuongTable.GetAll()
-				.Where(x => x.QuanHuyenId == id)
+			var xaPhuongList = _unitOfWork.XaPhuongTable.GetAll(x => x.QuanHuyenId == id)
 				.Select(x => new { x.Id, x.Name })
 				.ToList();
 

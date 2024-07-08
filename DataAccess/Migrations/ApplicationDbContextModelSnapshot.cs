@@ -29,6 +29,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -41,26 +44,31 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            IsApplied = true,
                             Name = "Bảo hiểm y tế"
                         },
                         new
                         {
                             Id = 2,
+                            IsApplied = true,
                             Name = "Bảo hiểm xã hội"
                         },
                         new
                         {
                             Id = 3,
+                            IsApplied = true,
                             Name = "Bảo hiểm thất nghiệp"
                         },
                         new
                         {
                             Id = 4,
+                            IsApplied = true,
                             Name = "Bảo hiểm tai nạn lao động, bệnh nghề nghiệp"
                         },
                         new
                         {
                             Id = 5,
+                            IsApplied = true,
                             Name = "Hưu trí"
                         });
                 });
@@ -76,6 +84,9 @@ namespace DataAccess.Migrations
                     b.Property<string>("DiaChi")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
 
                     b.Property<int>("NganHangId")
                         .HasColumnType("int");
@@ -96,6 +107,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 1,
                             DiaChi = "12 đường Lê Trọng Tấn",
+                            IsApplied = true,
                             NganHangId = 1,
                             XaPhuongId = 1
                         },
@@ -103,6 +115,7 @@ namespace DataAccess.Migrations
                         {
                             Id = 2,
                             DiaChi = "69 đường Tôn Thất Thuyết",
+                            IsApplied = true,
                             NganHangId = 2,
                             XaPhuongId = 4
                         });
@@ -116,6 +129,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -128,21 +144,25 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            IsApplied = true,
                             Name = "Giám đốc trung tâm"
                         },
                         new
                         {
                             Id = 2,
+                            IsApplied = true,
                             Name = "Phó giám đốc trung tâm"
                         },
                         new
                         {
                             Id = 3,
+                            IsApplied = true,
                             Name = "Leader"
                         },
                         new
                         {
                             Id = 4,
+                            IsApplied = true,
                             Name = "Nhân viên"
                         });
                 });
@@ -154,6 +174,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -167,26 +190,31 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            IsApplied = true,
                             Name = "Hợp đồng đào tạo"
                         },
                         new
                         {
                             Id = 2,
+                            IsApplied = true,
                             Name = "Hợp đồng học viên"
                         },
                         new
                         {
                             Id = 3,
+                            IsApplied = true,
                             Name = "Hợp đồng thử việc"
                         },
                         new
                         {
                             Id = 4,
+                            IsApplied = true,
                             Name = "Hợp đồng chính thức"
                         },
                         new
                         {
                             Id = 5,
+                            IsApplied = true,
                             Name = "Hợp đồng cộng tác viên"
                         });
                 });
@@ -198,6 +226,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -211,22 +242,252 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            IsApplied = true,
                             Name = "MB Bank"
                         },
                         new
                         {
                             Id = 2,
+                            IsApplied = true,
                             Name = "VP Bank"
                         },
                         new
                         {
                             Id = 3,
+                            IsApplied = true,
                             Name = "Techcombank"
                         },
                         new
                         {
                             Id = 4,
+                            IsApplied = true,
                             Name = "Viettinbank"
+                        });
+                });
+
+            modelBuilder.Entity("Models.PhongBan", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PhongBanTable");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            IsApplied = true,
+                            Name = "C12"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            IsApplied = true,
+                            Name = "C10"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            IsApplied = true,
+                            Name = "C9"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            IsApplied = true,
+                            Name = "C3"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            IsApplied = true,
+                            Name = "C6"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            IsApplied = true,
+                            Name = "DU"
+                        });
+                });
+
+            modelBuilder.Entity("Models.PhongBanChucDanh", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ChucDanhId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("PhongBanId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChucDanhId");
+
+                    b.HasIndex("PhongBanId");
+
+                    b.ToTable("PhongBanChucDanhTable");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ChucDanhId = 1,
+                            IsApplied = true,
+                            PhongBanId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ChucDanhId = 2,
+                            IsApplied = true,
+                            PhongBanId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ChucDanhId = 3,
+                            IsApplied = true,
+                            PhongBanId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            ChucDanhId = 4,
+                            IsApplied = true,
+                            PhongBanId = 1
+                        },
+                        new
+                        {
+                            Id = 5,
+                            ChucDanhId = 1,
+                            IsApplied = true,
+                            PhongBanId = 2
+                        },
+                        new
+                        {
+                            Id = 6,
+                            ChucDanhId = 2,
+                            IsApplied = true,
+                            PhongBanId = 2
+                        },
+                        new
+                        {
+                            Id = 7,
+                            ChucDanhId = 3,
+                            IsApplied = true,
+                            PhongBanId = 2
+                        },
+                        new
+                        {
+                            Id = 8,
+                            ChucDanhId = 4,
+                            IsApplied = true,
+                            PhongBanId = 2
+                        },
+                        new
+                        {
+                            Id = 9,
+                            ChucDanhId = 1,
+                            IsApplied = true,
+                            PhongBanId = 3
+                        },
+                        new
+                        {
+                            Id = 10,
+                            ChucDanhId = 2,
+                            IsApplied = true,
+                            PhongBanId = 3
+                        },
+                        new
+                        {
+                            Id = 11,
+                            ChucDanhId = 3,
+                            IsApplied = true,
+                            PhongBanId = 3
+                        },
+                        new
+                        {
+                            Id = 12,
+                            ChucDanhId = 4,
+                            IsApplied = true,
+                            PhongBanId = 3
+                        },
+                        new
+                        {
+                            Id = 13,
+                            ChucDanhId = 1,
+                            IsApplied = true,
+                            PhongBanId = 4
+                        },
+                        new
+                        {
+                            Id = 14,
+                            ChucDanhId = 2,
+                            IsApplied = true,
+                            PhongBanId = 4
+                        },
+                        new
+                        {
+                            Id = 15,
+                            ChucDanhId = 3,
+                            IsApplied = true,
+                            PhongBanId = 4
+                        },
+                        new
+                        {
+                            Id = 16,
+                            ChucDanhId = 4,
+                            IsApplied = true,
+                            PhongBanId = 4
+                        },
+                        new
+                        {
+                            Id = 17,
+                            ChucDanhId = 1,
+                            IsApplied = true,
+                            PhongBanId = 5
+                        },
+                        new
+                        {
+                            Id = 18,
+                            ChucDanhId = 2,
+                            IsApplied = true,
+                            PhongBanId = 5
+                        },
+                        new
+                        {
+                            Id = 19,
+                            ChucDanhId = 3,
+                            IsApplied = true,
+                            PhongBanId = 5
+                        },
+                        new
+                        {
+                            Id = 20,
+                            ChucDanhId = 4,
+                            IsApplied = true,
+                            PhongBanId = 5
                         });
                 });
 
@@ -237,6 +498,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -250,26 +514,31 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            IsApplied = true,
                             Name = "Bảo hiểm y tế"
                         },
                         new
                         {
                             Id = 2,
+                            IsApplied = true,
                             Name = "Bảo hiểm xã hội"
                         },
                         new
                         {
                             Id = 3,
+                            IsApplied = true,
                             Name = "Bảo hiểm thất nghiệp"
                         },
                         new
                         {
                             Id = 4,
+                            IsApplied = true,
                             Name = "Bảo hiểm tai nạn lao động, bệnh nghề nghiệp"
                         },
                         new
                         {
                             Id = 5,
+                            IsApplied = true,
                             Name = "Hưu trí"
                         });
                 });
@@ -281,6 +550,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -299,36 +571,42 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            IsApplied = true,
                             Name = "Hà Đông",
                             TinhThanhId = 1
                         },
                         new
                         {
                             Id = 2,
+                            IsApplied = true,
                             Name = "Đống Đa",
                             TinhThanhId = 1
                         },
                         new
                         {
                             Id = 3,
+                            IsApplied = true,
                             Name = "Hoàng Mai",
                             TinhThanhId = 1
                         },
                         new
                         {
                             Id = 4,
+                            IsApplied = true,
                             Name = "Cầu Giấy",
                             TinhThanhId = 1
                         },
                         new
                         {
                             Id = 5,
+                            IsApplied = true,
                             Name = "Ba Đình",
                             TinhThanhId = 1
                         },
                         new
                         {
                             Id = 6,
+                            IsApplied = true,
                             Name = "Quận 1",
                             TinhThanhId = 2
                         });
@@ -342,6 +620,9 @@ namespace DataAccess.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -354,16 +635,19 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            IsApplied = true,
                             Name = "Việt Nam"
                         },
                         new
                         {
                             Id = 2,
+                            IsApplied = true,
                             Name = "Nhật Bản"
                         },
                         new
                         {
                             Id = 3,
+                            IsApplied = true,
                             Name = "Hoa Kỳ"
                         });
                 });
@@ -375,6 +659,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -388,21 +675,25 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            IsApplied = true,
                             Name = "Máy tính"
                         },
                         new
                         {
                             Id = 2,
+                            IsApplied = true,
                             Name = "Chuột"
                         },
                         new
                         {
                             Id = 3,
+                            IsApplied = true,
                             Name = "Bàn phím"
                         },
                         new
                         {
                             Id = 4,
+                            IsApplied = true,
                             Name = "Ổ cứng"
                         });
                 });
@@ -414,6 +705,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -432,24 +726,28 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            IsApplied = true,
                             Name = "Hà Nội",
                             QuocGiaId = 1
                         },
                         new
                         {
                             Id = 2,
+                            IsApplied = true,
                             Name = "Thành phố Hồ Chí Minh",
                             QuocGiaId = 1
                         },
                         new
                         {
                             Id = 3,
+                            IsApplied = true,
                             Name = "Đà Nẵng",
                             QuocGiaId = 1
                         },
                         new
                         {
                             Id = 4,
+                            IsApplied = true,
                             Name = "Tokyo",
                             QuocGiaId = 2
                         });
@@ -462,6 +760,9 @@ namespace DataAccess.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("IsApplied")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -480,42 +781,49 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
+                            IsApplied = true,
                             Name = "La Khê",
                             QuanHuyenId = 1
                         },
                         new
                         {
                             Id = 2,
+                            IsApplied = true,
                             Name = "Khâm Thiên",
                             QuanHuyenId = 2
                         },
                         new
                         {
                             Id = 3,
+                            IsApplied = true,
                             Name = "Phương Liệt",
                             QuanHuyenId = 3
                         },
                         new
                         {
                             Id = 4,
+                            IsApplied = true,
                             Name = "Dịch Vọng",
                             QuanHuyenId = 4
                         },
                         new
                         {
                             Id = 5,
+                            IsApplied = true,
                             Name = "Mỹ Khê",
                             QuanHuyenId = 5
                         },
                         new
                         {
                             Id = 6,
+                            IsApplied = true,
                             Name = "Tân Định",
                             QuanHuyenId = 6
                         },
                         new
                         {
                             Id = 7,
+                            IsApplied = true,
                             Name = "Yên Hòa",
                             QuanHuyenId = 4
                         });
@@ -538,6 +846,25 @@ namespace DataAccess.Migrations
                     b.Navigation("NganHang");
 
                     b.Navigation("XaPhuong");
+                });
+
+            modelBuilder.Entity("Models.PhongBanChucDanh", b =>
+                {
+                    b.HasOne("Models.ChucDanh", "ChucDanh")
+                        .WithMany()
+                        .HasForeignKey("ChucDanhId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Models.PhongBan", "PhongBan")
+                        .WithMany()
+                        .HasForeignKey("PhongBanId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChucDanh");
+
+                    b.Navigation("PhongBan");
                 });
 
             modelBuilder.Entity("Models.QuanHuyen", b =>

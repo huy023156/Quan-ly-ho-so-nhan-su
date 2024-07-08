@@ -20,5 +20,7 @@ namespace Models
         [ForeignKey(nameof(QuanHuyenId))]
         [ValidateNever]
         public QuanHuyen QuanHuyen { get; set; }
+
+        public bool IsApplied { get; set; } = true;
     }
 }

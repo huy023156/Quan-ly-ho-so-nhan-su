@@ -20,5 +20,7 @@ namespace Models
         [ForeignKey(nameof(QuocGiaId))]
         [ValidateNever]
         public QuocGia QuocGia { get; set; }
+
+		public bool IsApplied { get; set; } = true;
     }
 }

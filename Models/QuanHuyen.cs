@@ -20,5 +20,7 @@ namespace Models
         [ForeignKey(nameof(TinhThanhId))]
         [ValidateNever]
         public TinhThanh TinhThanh { get; set; }
+
+		public bool IsApplied { get; set; } = true;
     }
 }
