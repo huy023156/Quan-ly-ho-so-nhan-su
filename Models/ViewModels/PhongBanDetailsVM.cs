@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 
 namespace Models.ViewModels
 {
-	public class PhongBanChucDanhVM
+	public class PhongBanDetailsVM
 	{
 		public PhongBan PhongBan { get; set; }
 
 		[ValidateNever]
 		public IEnumerable<SelectListItem> ChucDanhList { get; set; }
-
-		public int ChucDanhId { get; set; }
 	}
 }

@@ -1,6 +1,5 @@
-﻿@model PhongBanChucDanhVM
+﻿@model PhongBanDetailsVM
 
-<input type="hidden" id="phongBanId" value="@Model.PhongBan.Id" />
 <div class="card shadow border-0 mt-5">
     <div class="card-header bg-primary bg-gradient ml-0 py-3">
         <div class="col-12 text-center">
@@ -11,15 +10,15 @@
         <div class="row pb-3">
             @* <div class="col-6"></div> *@
             <div class="col-12 text-end">
-                <a asp-controller="PhongBanChucDanh" asp-action="Add" asp-route-phongBanId="@Model.PhongBan.Id" class="btn btn-primary">
-                    <i class="bi bi-plus-square"></i> Thêm chức danh vào phòng ban
+                <a asp-controller="HopDong" asp-action="Upsert" class="btn btn-primary">
+                    <i class="bi bi-plus-square"></i> Thêm phòng ban
                 </a>
             </div>
         </div>
         <table id="tblData" class="table table-bordered table-striped compact">
             <thead>
                 <tr>
-                    <th>Chức danh</th>
+                    <th>Name</th>
                     <th></th>
                 </tr>
             </thead>
@@ -28,5 +27,5 @@
 </div>
 
 @section Scripts {
-    <script src="~/js/phongBanChucDanh.js"></script>
+    <script src="~/js/hopDong.js"></script>
 }
