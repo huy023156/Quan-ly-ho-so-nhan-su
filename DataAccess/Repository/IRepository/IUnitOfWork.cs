@@ -21,6 +21,8 @@ namespace DataAccess.Repository.IRepository
         public IChiNhanhNganHangRepository ChiNhanhNganHangTable { get; }
         public IPhongBanRepository PhongBanTable { get; }
         public IPhongBanChucDanhRepository PhongBanChucDanhTable { get; }
+        public IDiaChiRepository DiaChiTable { get; }
+        public INoiKhamChuaBenhRepository NoiKhamChuaBenhTable { get; }
 
         void Save();
     }

@@ -28,6 +28,9 @@ namespace DataAccess.Data
         public DbSet<ChiNhanhNganHang> ChiNhanhNganHangTable { get; set; }
         public DbSet<PhongBan> PhongBanTable { get; set; }
         public DbSet<PhongBanChucDanh> PhongBanChucDanhTable { get; set; }
+        public DbSet<NoiKhamChuaBenh> NoiKhamChuaBenhTable { get; set; }
+
+        public DbSet<DiaChi> DiaChiTable { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ChucDanh>().HasData(
@@ -76,6 +79,13 @@ namespace DataAccess.Data
                 new XaPhuong { Id = 7, Name = "Yên Hòa", QuanHuyenId = 4 }
                 );
 
+            modelBuilder.Entity<DiaChi>().HasData(
+                new DiaChi { Id = 1, QuocGiaId = 1, TinhThanhId = 1, QuanHuyenId = 1, XaPhuongId = 1 },
+                new DiaChi { Id = 2, QuocGiaId = 1, TinhThanhId = 1, QuanHuyenId = 2, XaPhuongId = 2 },
+                new DiaChi { Id = 3, QuocGiaId = 1, TinhThanhId = 1, QuanHuyenId = 3, XaPhuongId = 3 },
+                new DiaChi { Id = 4, QuocGiaId = 1, TinhThanhId = 1, QuanHuyenId = 4, XaPhuongId = 4 }
+                );
+
             modelBuilder.Entity<TaiSanCapPhat>().HasData(
                 new TaiSanCapPhat { Id = 1, Name = "Máy tính" },
                 new TaiSanCapPhat { Id = 2, Name = "Chuột"},
@@ -107,10 +117,9 @@ namespace DataAccess.Data
 				);
 
             modelBuilder.Entity<ChiNhanhNganHang>().HasData(
-                new ChiNhanhNganHang 
-                { Id = 1, NganHangId = 1, DiaChi = "12 đường Lê Trọng Tấn", XaPhuongId = 1},
-                new ChiNhanhNganHang 
-                { Id = 2, NganHangId = 2, DiaChi = "69 đường Tôn Thất Thuyết", XaPhuongId = 4}
+                new ChiNhanhNganHang { Id = 1, NganHangId = 1, DiaChiId = 1, DiaChiDetail = "12 Le Trong Tan"},
+                new ChiNhanhNganHang { Id = 2, NganHangId = 2, DiaChiId = 2, DiaChiDetail = "20 Duong Lang"},
+                new ChiNhanhNganHang { Id = 3, NganHangId = 3, DiaChiId = 3, DiaChiDetail = "50 Duong Mac Thai Tong"}
                 );
 
             modelBuilder.Entity<PhongBan>().HasData(
@@ -144,6 +153,10 @@ namespace DataAccess.Data
                 new PhongBanChucDanh { Id = 19, PhongBanId = 5, ChucDanhId = 3},
                 new PhongBanChucDanh { Id = 20, PhongBanId = 5, ChucDanhId = 4}
 				);
+
+            modelBuilder.Entity<NoiKhamChuaBenh>().HasData(
+                new NoiKhamChuaBenh { Id = 1, Name = "Phong kham Tre Viet", DiaChiDetail = "18 Hoang Son", DiaChiId = 8}
+                );
         }
     }
 }

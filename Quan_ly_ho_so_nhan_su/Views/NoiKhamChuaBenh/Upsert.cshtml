@@ -1,34 +1,32 @@
-﻿@model ChiNhanhNganHangVM
+﻿@model NoiKhamChuaBenhVM
 
 <div class="card shadow border-0 mt-5">
-	<div class="card-header bg-primary bg-gradient ml-0 py-3">
-		<div class="row">
-			<div class="col-12 text-center">
-				<h2 class="text-white-50 py-2">@(Model.ChiNhanhNganHang.Id == 0 ? "Thêm" : "Sửa") chi nhánh ngân hàng</h2>
-			</div>
-		</div>
-	</div>
-	<div class="card-body p-4">
-		<form method="post" class="row">
-			<input asp-for="ChiNhanhNganHang.Id" hidden />
-            <input asp-for="ChiNhanhNganHang.DiaChiId" hidden />
+    <div class="card-header bg-primary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white-50 py-2">@(Model.NoiKhamChuaBenh.Id == 0 ? "Thêm" : "Sửa") chi nhánh ngân hàng</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input asp-for="NoiKhamChuaBenh.Id" hidden />
+            <input asp-for="NoiKhamChuaBenh.DiaChiId" hidden />
 
-			@* <span asp-validation-sumary="ModelOnly"></span> *@
+            @* <span asp-validation-sumary="ModelOnly"></span> *@
 
-			<div class="border p-3">
-				<div class="form-floating col-12 py-2">
-					<select asp-items="Model.NganHangList" asp-for="ChiNhanhNganHang.NganHangId" class="form-select border-0 shadow">
-						<option disabled selected>--Select Ngân Hàng--</option>
-					</select>
-					<label asp-for="ChiNhanhNganHang.NganHangId" class="ms-2"></label>
-					<span asp-validation-for="ChiNhanhNganHang.NganHangId" class="text-danger"></span>
-				</div>
+            <div class="border p-3">
                 <div class="form-floating col-12 py-2">
-                    <input asp-for="ChiNhanhNganHang.DiaChiDetail" class="form-control border-0 shadow" />
-                    <label asp-for="ChiNhanhNganHang.DiaChiDetail" class="ms-2"></label>
-                    <span asp-validation-for="ChiNhanhNganHang.DiaChiDetail" class="text-danger"></span>
+                    <input asp-for="NoiKhamChuaBenh.Name" class="form-control border-0 shadow" />
+                    <label asp-for="NoiKhamChuaBenh.Name" class="ms-2"></label>
+                    <span asp-validation-for="NoiKhamChuaBenh.Name" class="text-danger"></span>
                 </div>
-                @if (Model.ChiNhanhNganHang.Id == 0)
+                <div class="form-floating col-12 py-2">
+                    <input asp-for="NoiKhamChuaBenh.DiaChiDetail" class="form-control border-0 shadow" />
+                    <label asp-for="NoiKhamChuaBenh.DiaChiDetail" class="ms-2"></label>
+                    <span asp-validation-for="NoiKhamChuaBenh.DiaChiDetail" class="text-danger"></span>
+                </div>
+                @if (Model.NoiKhamChuaBenh.Id == 0)
                 {
                     <div class="form-floating col-12 py-2">
                         <select asp-items="Model.QuocGiaList" asp-for="QuocGiaId" class="form-select border-0 shadow">
@@ -58,7 +56,8 @@
                         <label asp-for="XaPhuongId" class="ms-2"></label>
                         <span asp-validation-for="XaPhuongId" class="text-danger"></span>
                     </div>
-                } else
+                }
+                else
                 {
                     <div class="form-floating col-12 py-2">
                         <select asp-items="Model.QuocGiaList" asp-for="QuocGiaId" class="form-select border-0 shadow">
@@ -90,20 +89,20 @@
                     </div>
                 }
 
-				<div class="row pt-2">
-					<div class="col-6 col-md-3">
-						<button type="submit" class="btn btn-primary form-control">@(Model.ChiNhanhNganHang.Id == 0 ? "Thêm" : "Sửa")</button>
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">@(Model.NoiKhamChuaBenh.Id == 0 ? "Thêm" : "Sửa")</button>
 
-					</div>
-					<div class="col-6 col-md-3">
-						<a asp-controller="ChiNhanhNganHang" asp-action="Index" class="btn btn-outline-secondary form-control">
-							Quay lại
-						</a>
-					</div>
-				</div>
-			</div>
-		</form>
-	</div>
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="NoiKhamChuaBenh" asp-action="Index" class="btn btn-outline-secondary form-control">
+                            Quay lại
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 
 
@@ -113,7 +112,7 @@
     }
 
     <script @* src="~/js/chiNhanhNganHangUpsert.js" *@>
-                $(document).ready(function () {
+        $(document).ready(function () {
             $('#QuocGiaId').change(function () {
                 var quocGiaId = $(this).val();
                 if (quocGiaId) {

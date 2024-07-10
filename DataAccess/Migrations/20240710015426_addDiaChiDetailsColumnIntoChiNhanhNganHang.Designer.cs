@@ -3,6 +3,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240710015426_addDiaChiDetailsColumnIntoChiNhanhNganHang")]
+    partial class addDiaChiDetailsColumnIntoChiNhanhNganHang
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -337,45 +340,6 @@ namespace DataAccess.Migrations
                             Id = 4,
                             IsApplied = true,
                             Name = "Viettinbank"
-                        });
-                });
-
-            modelBuilder.Entity("Models.NoiKhamChuaBenh", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("DiaChiDetail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("DiaChiId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("IsApplied")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DiaChiId");
-
-                    b.ToTable("NoiKhamChuaBenhTable");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DiaChiDetail = "18 Hoang Son",
-                            DiaChiId = 8,
-                            IsApplied = true,
-                            Name = "Phong kham Tre Viet"
                         });
                 });
 
@@ -995,17 +959,6 @@ namespace DataAccess.Migrations
                     b.Navigation("TinhThanh");
 
                     b.Navigation("XaPhuong");
-                });
-
-            modelBuilder.Entity("Models.NoiKhamChuaBenh", b =>
-                {
-                    b.HasOne("Models.DiaChi", "DiaChi")
-                        .WithMany()
-                        .HasForeignKey("DiaChiId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DiaChi");
                 });
 
             modelBuilder.Entity("Models.PhongBanChucDanh", b =>

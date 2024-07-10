@@ -33,11 +33,17 @@ namespace Utility
                     if (!tinhThanh.IsApplied) return false;
                     if (!tinhThanh.QuocGia.IsApplied) return false;
                     return true;
-                case ChiNhanhNganHang cn:
-                    return cn.NganHang.IsApplied && AreDependenciesValid(cn.XaPhuong, unitOfWork);
+                //case ChiNhanhNganHang cn:
+                //    return cn.NganHang.IsApplied && AreDependenciesValid(cn.XaPhuong, unitOfWork);
                 default:
                     return false;
             }
+        }
+
+        public static string GetDiaChiFull(int id, IUnitOfWork unitOfWork)
+        {
+            DiaChi diaChi = unitOfWork.DiaChiTable.Get(d => d.Id == id, includeProperties: "QuocGia,TinhThanh,QuanHuyen,XaPhuong");
+            return diaChi.XaPhuong.Name + ", " + diaChi.QuanHuyen.Name + ", " + diaChi.TinhThanh.Name + ", " + diaChi.QuocGia.Name;   
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -10,28 +9,17 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class ChiNhanhNganHang
+    public class NoiKhamChuaBenh
     {
-        [Key]
         public int Id { get; set; }
-
-        public string DiaChiDetail { get; set; }
-
         [Required]
+        public string Name { get; set; }
+        public string DiaChiDetail { get; set; }
         public int DiaChiId { get; set; }
         [ForeignKey(nameof(DiaChiId))]
         [ValidateNever]
         public DiaChi DiaChi { get; set; }
 
-        [Required]
-        public int NganHangId { get; set; }
-        [ForeignKey(nameof(NganHangId))]
-        [ValidateNever]
-        public NganHang NganHang { get; set; }
-
-
-
         public bool IsApplied { get; set; } = true;
-
     }
 }

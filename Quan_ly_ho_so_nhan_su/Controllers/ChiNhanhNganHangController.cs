@@ -44,20 +44,21 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
             }
             else
             {
-				chiNhanhNganHangVM.ChiNhanhNganHang = _unitOfWork.ChiNhanhNganHangTable.Get(u => u.Id == id, includeProperties: "XaPhuong");
-                QuanHuyen quanHuyen = _unitOfWork.QuanHuyenTable.Get(u => u.Id == chiNhanhNganHangVM.ChiNhanhNganHang.XaPhuong.QuanHuyenId && u.IsApplied == true);
-                TinhThanh tinhThanh = _unitOfWork.TinhThanhTable.Get(u => u.Id == quanHuyen.TinhThanhId/* && u.IsApplied == true*/);
-                chiNhanhNganHangVM.QuanHuyenId = quanHuyen.Id;
-				chiNhanhNganHangVM.TinhThanhId = tinhThanh.Id;
-                chiNhanhNganHangVM.QuocGiaId = tinhThanh.QuocGiaId;
+                chiNhanhNganHangVM.ChiNhanhNganHang = _unitOfWork.ChiNhanhNganHangTable.Get(u => u.Id == id);
+                DiaChi diaChi = _unitOfWork.DiaChiTable.Get(u => u.Id == chiNhanhNganHangVM.ChiNhanhNganHang.DiaChiId, includeProperties:"QuocGia,TinhThanh,QuanHuyen,XaPhuong");
 
-				chiNhanhNganHangVM.XaPhuongList = _unitOfWork.XaPhuongTable.GetAll(u => u.QuanHuyenId == chiNhanhNganHangVM.QuanHuyenId/* && u.IsApplied == true*/).Select(
-	                u => new SelectListItem { Value = u.Id.ToString(), Text = u.Name }
-	                );
-				chiNhanhNganHangVM.QuanHuyenList = _unitOfWork.QuanHuyenTable.GetAll(u => u.TinhThanhId == tinhThanh.Id/* && u.IsApplied == true*/).Select(
-	                u => new SelectListItem { Value = u.Id.ToString(), Text = u.Name }
-	                );
-				chiNhanhNganHangVM.TinhThanhList = _unitOfWork.TinhThanhTable.GetAll(u => u.QuocGiaId == chiNhanhNganHangVM.QuocGiaId/* && u.IsApplied == true*/).Select(
+                chiNhanhNganHangVM.QuocGiaId = diaChi.QuocGiaId;
+                chiNhanhNganHangVM.TinhThanhId = diaChi.TinhThanhId;
+                chiNhanhNganHangVM.QuanHuyenId = diaChi.QuanHuyenId;
+                chiNhanhNganHangVM.XaPhuongId = diaChi.XaPhuongId;
+
+                chiNhanhNganHangVM.XaPhuongList = _unitOfWork.XaPhuongTable.GetAll(u => u.QuanHuyenId == diaChi.QuanHuyenId/* && u.IsApplied == true*/).Select(
+                    u => new SelectListItem { Value = u.Id.ToString(), Text = u.Name }
+                    );
+                chiNhanhNganHangVM.QuanHuyenList = _unitOfWork.QuanHuyenTable.GetAll(u => u.TinhThanhId == diaChi.TinhThanhId/* && u.IsApplied == true*/).Select(
+                    u => new SelectListItem { Value = u.Id.ToString(), Text = u.Name }
+                    );
+                chiNhanhNganHangVM.TinhThanhList = _unitOfWork.TinhThanhTable.GetAll(u => u.QuocGiaId == diaChi.QuocGiaId/* && u.IsApplied == true*/).Select(
                     u => new SelectListItem { Value = u.Id.ToString(), Text = u.Name }
                     );
             }
@@ -72,11 +73,32 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
             {
                 if (chiNhanhNganHangVM.ChiNhanhNganHang.Id == 0)
                 {
+                    DiaChi diaChi = new DiaChi()
+                    {
+                        QuocGiaId = chiNhanhNganHangVM.QuocGiaId,
+                        TinhThanhId = chiNhanhNganHangVM.TinhThanhId,
+                        QuanHuyenId = chiNhanhNganHangVM.QuanHuyenId,
+                        XaPhuongId = chiNhanhNganHangVM.XaPhuongId
+                    };
+
+                    _unitOfWork.DiaChiTable.Add(diaChi);
+                    _unitOfWork.Save();
+
+                    chiNhanhNganHangVM.ChiNhanhNganHang.DiaChiId = diaChi.Id;
+
                     _unitOfWork.ChiNhanhNganHangTable.Add(chiNhanhNganHangVM.ChiNhanhNganHang);
                     TempData["success"] = "Tạo chi nhanh ngân hàng thành công";
                 }
                 else
                 {
+                    DiaChi diachiToUpdate = _unitOfWork.DiaChiTable.Get(d => d.Id == chiNhanhNganHangVM.ChiNhanhNganHang.DiaChiId);
+
+                    diachiToUpdate.QuocGiaId = chiNhanhNganHangVM.QuocGiaId;
+                    diachiToUpdate.TinhThanhId = chiNhanhNganHangVM.TinhThanhId;
+                    diachiToUpdate.QuanHuyenId = chiNhanhNganHangVM.QuanHuyenId;
+                    diachiToUpdate.XaPhuongId = chiNhanhNganHangVM.XaPhuongId;
+
+                    _unitOfWork.DiaChiTable.Update(diachiToUpdate);
                     _unitOfWork.ChiNhanhNganHangTable.Update(chiNhanhNganHangVM.ChiNhanhNganHang);
                     TempData["success"] = "Sửa chi nhánh ngân hàng thành công";
                 }
@@ -104,10 +126,16 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<ChiNhanhNganHang> chiNhanhNganHangTable = _unitOfWork.ChiNhanhNganHangTable.GetAll(includeProperties: "NganHang,XaPhuong").Where(
-                cn => UtilClass.AreDependenciesValid(cn, _unitOfWork)
-                ).ToList();
-            return Json(new { data = chiNhanhNganHangTable });
+            List<ChiNhanhNganHangView> chinhanhnganhangtable = _unitOfWork.ChiNhanhNganHangTable.GetAll(includeProperties: "NganHang,DiaChi")
+                .Select(c => new ChiNhanhNganHangView
+                {
+                    Id = c.Id,
+                    NganHangName = c.NganHang.Name,
+                    XaPhuongName = _unitOfWork.XaPhuongTable.Get(u => u.Id == c.DiaChi.XaPhuongId).Name,
+                    DiaChi = c.DiaChiDetail,
+                    IsApplied = c.IsApplied,
+                }).ToList();
+            return Json(new { data = chinhanhnganhangtable });
         }
 
         [HttpDelete]

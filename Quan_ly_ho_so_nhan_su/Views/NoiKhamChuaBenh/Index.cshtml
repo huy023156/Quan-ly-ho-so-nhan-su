@@ -1,25 +1,24 @@
-﻿@model List<ChiNhanhNganHang>
+﻿@model List<NoiKhamChuaBenh>
 
 <div class="card shadow border-0 mt-5">
     <div class="card-header bg-primary bg-gradient ml-0 py-3">
         <div class="col-12 text-center">
-            <h2 class="text-white-50 py-2">Danh sách chi nhánh ngân hàng</h2>
+            <h2 class="text-white-50 py-2">Danh sách nơi khám chữa bệnh</h2>
         </div>
     </div>
     <div class="card-body shadow p-4">
         <div class="row pb-3">
             @* <div class="col-6"></div> *@
             <div class="col-12 text-end">
-                <a asp-controller="ChiNhanhNganHang" asp-action="Upsert" class="btn btn-primary">
-                    <i class="bi bi-plus-square"></i> Tạo chi nhánh ngân hàng mới
+                <a asp-controller="NoiKhamChuaBenh" asp-action="Upsert" class="btn btn-primary">
+                    <i class="bi bi-plus-square"></i> Tạo nơi khám chữa bệnh mới
                 </a>
             </div>
         </div>
         <table id="tblData" class="table table-bordered table-striped compact">
             <thead>
                 <tr>
-                    <th>Tên ngân hàng</th>
-                    <th>Chi nhánh</th>
+                    <th>Tên bệnh viện</th>
                     <th>Địa chỉ</th>
                     <th>Trạng thái</th>
                     <th></th>
@@ -39,11 +38,10 @@
 
         function loadDataTable() {
             dataTable = $('#tblData').DataTable({
-                "ajax": { url: 'ChiNhanhNganHang/GetAll' },
+                "ajax": { url: 'NoiKhamChuaBenh/GetAll' },
                 "columns": [
-                    { data: 'nganHangName', width: '12.5%' },
-                    { data: 'xaPhuongName', width: '12.5%' },
-                    { data: 'diaChi', width: '25%' },
+                    { data: 'name', width: '15%' },
+                    { data: 'diaChi', width: '35%' },
                     {
                         data: 'isApplied',
                         "render": function (data) {
@@ -55,12 +53,12 @@
                         data: 'id',
                         "render": function (data, type, row) {
                             return `<div class="w-100 btn-group ms-auto btn-group-equal" role="group">
-                                        <a href="/ChiNhanhNganHang/Upsert?id=${data}" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Sửa</a>
-                                        <a onClick="Delete('/ChiNhanhNganHang/Delete/${data}')" class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i> Xóa</a>
-                                        <a onClick="ToggleApply(${data}, ${row.isApplied})" class="btn btn-${row.isApplied ? 'warning' : 'success'} mx-2">
-                                            <i class="bi bi-${row.isApplied ? 'x-circle' : 'check-circle'}"></i> ${row.isApplied ? 'Ngừng áp dụng' : 'Áp dụng'}
-                                        </a>
-                                    </div>`;
+                                                <a href="/NoiKhamChuaBenh/Upsert?id=${data}" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Sửa</a>
+                                                <a onClick="Delete('/NoiKhamChuaBenh/Delete/${data}')" class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i> Xóa</a>
+                                                <a onClick="ToggleApply(${data}, ${row.isApplied})" class="btn btn-${row.isApplied ? 'warning' : 'success'} mx-2">
+                                                    <i class="bi bi-${row.isApplied ? 'x-circle' : 'check-circle'}"></i> ${row.isApplied ? 'Ngừng áp dụng' : 'Áp dụng'}
+                                                </a>
+                                            </div>`;
                         },
                         width: '40%'
                     }
@@ -71,7 +69,7 @@
         function Delete(url) {
             Swal.fire({
                 title: "Bạn chắc chứ?",
-                text: "Chi nhánh ngân hàng sẽ bị xóa vĩnh viễn!",
+                text: "Danh mục nơi khám chữa bệnh sẽ bị xóa vĩnh viễn!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#3085d6",
@@ -103,7 +101,7 @@
             }).then((result) => {
                 if (result.isConfirmed) {
                     $.ajax({
-                        url: '/ChiNhanhNganHang/ToggleApply',
+                        url: '/NoiKhamChuaBenh/ToggleApply',
                         type: 'POST',
                         data: { id: id },
                         success: function (data) {
@@ -117,5 +115,5 @@
                 }
             });
         }
-        </script>
+    </script>
 }

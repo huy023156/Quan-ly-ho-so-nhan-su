@@ -18,7 +18,7 @@
                         disabled: true,
                         selected: true
                     })).prop('disabled', true);
-                    $('#ChiNhanhNganHang_XaPhuongId').empty().append($('<option>', {
+                    $('#XaPhuongId').empty().append($('<option>', {
                         value: '',
                         text: '--Select Xã Phường--',
                         disabled: true,
@@ -45,7 +45,7 @@
                 disabled: true,
                 selected: true
             })).prop('disabled', true);
-            $('#ChiNhanhNganHang_XaPhuongId').empty().append($('<option>', {
+            $('#XaPhuongId').empty().append($('<option>', {
                 value: '',
                 text: '--Select Xã Phường--',
                 disabled: true,
@@ -67,7 +67,7 @@
                         disabled: true,
                         selected: true
                     })).prop('disabled', false);
-                    $('#ChiNhanhNganHang_XaPhuongId').empty().append($('<option>', {
+                    $('#XaPhuongId').empty().append($('<option>', {
                         value: '',
                         text: '--Select Xã Phường--',
                         disabled: true,
@@ -88,7 +88,7 @@
                 disabled: true,
                 selected: true
             })).prop('disabled', true);
-            $('#ChiNhanhNganHang_XaPhuongId').empty().append($('<option>', {
+            $('#XaPhuongId').empty().append($('<option>', {
                 value: '',
                 text: '--Select Xã Phường--',
                 disabled: true,
@@ -104,27 +104,33 @@
                 url: '/diachiapi/GetXaPhuongListByQuanHuyenId/' + quanHuyenId,
                 type: "GET",
                 success: function (response) {
-                    $('#ChiNhanhNganHang_XaPhuongId').empty().append($('<option>', {
+                    console.log(response); // Debug dữ liệu phản hồi
+                    $('#XaPhuongId').empty().append($('<option>', {
                         value: '',
                         text: '--Select Xã Phường--',
                         disabled: true,
                         selected: true
                     })).prop('disabled', false);
+                    console.log($('#XaPhuongId').prop('disabled')); // Debug trạng thái disabled
                     $.each(response.data, function (index, item) {
-                        $('#ChiNhanhNganHang_XaPhuongId').append($('<option>', {
+                        $('#XaPhuongId').append($('<option>', {
                             value: item.id,
                             text: item.name
                         }));
                     });
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error: " + status + " - " + error); // Debug lỗi
                 }
             });
         } else {
-            $('#ChiNhanhNganHang_XaPhuongId').empty().append($('<option>', {
+            $('#XaPhuongId').empty().append($('<option>', {
                 value: '',
                 text: '--Select Xã Phường--',
                 disabled: true,
                 selected: true
             })).prop('disabled', true);
+            console.log($('#XaPhuongId').prop('disabled')); // Debug trạng thái disabled
         }
     });
 });

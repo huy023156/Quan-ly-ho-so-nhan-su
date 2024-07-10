@@ -2,16 +2,15 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Models.ViewModels
 {
-    public class ChiNhanhNganHangVM
+    public class NoiKhamChuaBenhVM
     {
-        public ChiNhanhNganHang ChiNhanhNganHang { get; set; }
+        public NoiKhamChuaBenh NoiKhamChuaBenh { get; set; }
 
         public int QuocGiaId { get; set; }
         public int TinhThanhId { get; set; }
@@ -19,8 +18,6 @@ namespace Models.ViewModels
         public int XaPhuongId { get; set; }
 
         [ValidateNever]
-		public IEnumerable<SelectListItem> NganHangList { get; set; }
-		[ValidateNever]
         public IEnumerable<SelectListItem> QuocGiaList { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem> TinhThanhList { get; set; }
