@@ -40,10 +40,21 @@ namespace Utility
             }
         }
 
-        public static string GetDiaChiFull(int id, IUnitOfWork unitOfWork)
+        public static string GetDiaChiFull(int diaChiId, IUnitOfWork unitOfWork)
         {
-            DiaChi diaChi = unitOfWork.DiaChiTable.Get(d => d.Id == id, includeProperties: "QuocGia,TinhThanh,QuanHuyen,XaPhuong");
+            DiaChi diaChi = unitOfWork.DiaChiTable.Get(d => d.Id == diaChiId, includeProperties: "QuocGia,TinhThanh,QuanHuyen,XaPhuong");
             return diaChi.XaPhuong.Name + ", " + diaChi.QuanHuyen.Name + ", " + diaChi.TinhThanh.Name + ", " + diaChi.QuocGia.Name;   
         }
+
+        public static string GetNameByTypeAndId(Type type, int id, IUnitOfWork unitOfWork)
+        {
+            if (type == typeof(QuocGia)) return unitOfWork.QuocGiaTable.Get(u => u.Id == id).Name;
+            if (type == typeof(TinhThanh)) return unitOfWork.TinhThanhTable.Get(u => u.Id == id).Name;
+            if (type == typeof(QuanHuyen)) return unitOfWork.QuanHuyenTable.Get(u => u.Id == id).Name;
+			if (type == typeof(XaPhuong)) return unitOfWork.XaPhuongTable.Get(u => u.Id == id).Name;
+			if (type == typeof(NganHang)) return unitOfWork.NganHangTable.Get(u => u.Id == id).Name;
+
+			return "NOT FOUND";
+		}
     }
 }

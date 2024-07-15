@@ -1,0 +1,129 @@
+﻿@model List<Employee>
+
+<div class="card shadow border-0 mt-5">
+    <div class="card-header bg-primary bg-gradient ml-0 py-3">
+        <div class="col-12 text-center">
+            <h2 class="text-white-50 py-2">Danh sách nhân viên</h2>
+        </div>
+    </div>
+    <div class="card-body shadow p-4">
+        <div class="row pb-3">
+            @* <div class="col-6"></div> *@
+            <div class="col-12 text-end">
+                <a asp-controller="Employee" asp-action="Upsert" class="btn btn-primary">
+                    <i class="bi bi-plus-square"></i> Tạo nhân viên mới
+                </a>
+            </div>
+        </div>
+        <table id="tblData" class="table table-bordered table-striped compact">
+            <thead>
+                <tr>
+                    <th>Tên</th>
+                    <th>Giới tính</th>
+                    <th>Địa chỉ</th>
+                    <th>Số điện thoại</th>
+                    <th>Email</th>
+                    <th>Phòng ban</th>
+                    <th>Chức danh</th>
+                    <th>Trạng thái</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script @* src="~/js/chiNhanhNganHang.js" *@>
+        var dataTable;
+
+        $(document).ready(function () {
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            dataTable = $('#tblData').DataTable({
+                "ajax": { url: '/Employee/GetAll' },
+                "columns": [
+                    { data: 'name', width: '10%' },
+                    { data: 'gender', width: '5%' },
+                    { data: 'diaChi', width: '20%' },
+                    { data: 'phoneNumber', width: '10%' },
+                    { data: 'email', width: '10%' },
+                    { data: 'phongBan', width: '10%' },
+                    { data: 'chucDanh', width: '10%' },
+                    {
+                        data: 'isApplied',
+                        "render": function (data) {
+                            return data ? 'Đang áp dụng' : 'Không áp dụng';
+                        },
+                        width: '10%'
+                    },
+                    {
+                        data: 'id',
+                        "render": function (data, type, row) {
+                            return `<div class="w-100 btn-group ms-auto btn-group-equal" role="group">
+                                                                <a href="/Employee/Upsert?id=${data}" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Sửa</a>
+                                                                <a onClick="Delete('/Employee/Delete/${data}')" class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i> Xóa</a>
+                                                                <a onClick="ToggleApply(${data}, ${row.isApplied})" class="btn btn-${row.isApplied ? 'warning' : 'success'} mx-2">
+                                                                    <i class="bi bi-${row.isApplied ? 'x-circle' : 'check-circle'}"></i> ${row.isApplied ? 'Ngừng áp dụng' : 'Áp dụng'}
+                                                                </a>
+                                                    </div>`;
+                        },
+                        width: '15%'
+                    }
+                ]
+            });
+        }
+
+        function Delete(url) {
+            Swal.fire({
+                title: "Bạn chắc chứ?",
+                text: "Nhân viên sẽ bị xóa vĩnh viễn!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Xóa"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: url,
+                        type: 'DELETE',
+                        success: function (data) {
+                            dataTable.ajax.reload();
+                            toastr.success(data.message);
+                        }
+                    })
+                }
+            });
+        }
+
+        function ToggleApply(id, isApplied) {
+            Swal.fire({
+                title: isApplied ? "Ngừng áp dụng?" : "Áp dụng?",
+                text: isApplied ? "Chi nhánh sẽ ngừng áp dụng." : "Chi nhánh sẽ được áp dụng.",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: isApplied ? "Ngừng áp dụng" : "Áp dụng"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: '/Employee/ToggleApply',
+                        type: 'POST',
+                        data: { id: id },
+                        success: function (data) {
+                            dataTable.ajax.reload();
+                            toastr.success(data.message);
+                        },
+                        error: function (xhr, status, error) {
+                            toastr.error("Thay đổi trạng thái không thành công");
+                        }
+                    });
+                }
+            });
+        }
+    </script>
+}

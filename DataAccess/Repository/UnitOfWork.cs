@@ -26,6 +26,13 @@ namespace DataAccess.Repository
         public IPhongBanChucDanhRepository PhongBanChucDanhTable { get; private set; }
         public IDiaChiRepository DiaChiTable { get; private set; }
         public INoiKhamChuaBenhRepository NoiKhamChuaBenhTable { get; private set; }
+        public IEmployeeRepository EmployeeTable { get; private set; }
+        public IQuyetDinhDetailRepository QuyetDinhDetailTable { get; private set; }
+        public IQuyetDinhRepository QuyetDinhTable { get; private set; }
+        public IHopDongDetailRepository HopDongDetailTable { get; private set; }
+        public IHoSoLuongRepository HoSoLuongTable { get; private set; }
+        public IHoSoLuongPhuCapRepository HoSoLuongPhuCapTable { get; private set; }
+        public IHoSoLuongCheDoPhucLoiRepository HoSoLuongCheDoPhucLoiTable { get; private set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -46,6 +53,13 @@ namespace DataAccess.Repository
             PhongBanChucDanhTable = new PhongBanChucDanhRepository(db);
             DiaChiTable = new DiaChiRepository(db);
             NoiKhamChuaBenhTable = new NoiKhamChuaBenhRepository(db);
+            EmployeeTable = new EmployeeRepository(db);
+            QuyetDinhDetailTable = new QuyetDinhDetailRepository(db);
+            QuyetDinhTable = new QuyetDinhRepository(db);
+            HopDongDetailTable = new HopDongDetailRepository(db);
+            HoSoLuongTable = new HoSoLuongRepository(db);
+            HoSoLuongPhuCapTable = new HoSoLuongPhuCapRepository(db);
+            HoSoLuongCheDoPhucLoiTable = new HoSoLuongCheDoPhucLoiRepository(db);
         }
 
         public void Save()

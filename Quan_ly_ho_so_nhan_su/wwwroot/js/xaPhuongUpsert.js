@@ -3,7 +3,7 @@
         var quocGiaId = $(this).val();
         if (quocGiaId) {
             $.ajax({
-                url: '/diachiapi/GetTinhThanhListByQuocGiaId/' + quocGiaId,
+                url: '/api/GetTinhThanhListByQuocGiaId/' + quocGiaId,
                 type: "GET",
                 success: function (response) {
                     $('#TinhThanhId').empty().append($('<option>', {
@@ -46,7 +46,7 @@
         var tinhThanhId = $(this).val();
         if (tinhThanhId) {
             $.ajax({
-                url: '/diachiapi/GetQuanHuyenListByTinhThanhId/' + tinhThanhId,
+                url: '/api/GetQuanHuyenListByTinhThanhId/' + tinhThanhId,
                 type: "GET",
                 success: function (response) {
                     $('#XaPhuong_QuanHuyenId').empty().append($('<option>', {

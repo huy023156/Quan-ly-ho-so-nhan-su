@@ -1,0 +1,88 @@
+﻿@model HoSoLuongVM
+
+<div class="card shadow border-0 mt-5">
+    <div class="card-header bg-primary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white-50 py-2">@(Model.HoSoLuong.Id == 0 ? "Thêm" : "Sửa") hồ sơ lương</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input asp-for="HoSoLuong.Id" hidden />
+            @* <span asp-validation-sumary="ModelOnly"></span> *@
+            <div class="border p-3 row">
+                <div class="form-floating col-6 py-2">
+                    <select asp-items="Model.EmployeeList" asp-for="HoSoLuong.EmployeeId" class="form-select border-0 shadow" id="cc">
+                        <option disabled selected>--Select nhân viên--</option>
+                    </select>
+                    <label asp-for="HoSoLuong.EmployeeId" class="ms-2"></label>
+                    <span asp-validation-for="HoSoLuong.EmployeeId" class="text-danger"></span>
+                </div>
+                <div class="form-floating col-6 py-2">
+                    <input asp-for="HoSoLuong.BacLuong" class="form-control border-0 shadow" />
+                    <label asp-for="HoSoLuong.BacLuong" class="ms-2"></label>
+                    <span asp-validation-for="HoSoLuong.BacLuong" class="text-danger"></span>
+                </div>
+                <div class="form-floating col-6 py-2">
+                    <input asp-for="HoSoLuong.LuongCoBan" class="form-control border-0 shadow" />
+                    <label asp-for="HoSoLuong.LuongCoBan" class="ms-2"></label>
+                    <span asp-validation-for="HoSoLuong.LuongCoBan" class="text-danger"></span>
+                </div>
+                <div class="form-floating col-6 py-2">
+                    <input asp-for="HoSoLuong.RanhLuongMin" class="form-control border-0 shadow" />
+                    <label asp-for="HoSoLuong.RanhLuongMin" class="ms-2"></label>
+                    <span asp-validation-for="HoSoLuong.RanhLuongMin" class="text-danger"></span>
+                </div>
+                <div class="form-floating col-6 py-2">
+                    <input asp-for="HoSoLuong.RanhLuongMax" class="form-control border-0 shadow" />
+                    <label asp-for="HoSoLuong.RanhLuongMax" class="ms-2"></label>
+                    <span asp-validation-for="HoSoLuong.RanhLuongMax" class="text-danger"></span>
+                </div>
+                @foreach (int i in Model.PhuCapDictionary.Keys)
+                {
+                    <div class="form-floating col-6 py-2">
+                        <input asp-for="PhuCapDictionary[i]" class="form-control border-0 shadow" />
+                        <label class="ms-2">Phụ cấp @Model.PhuCapNameDictionary[i] (Nghìn đồng/đơn vị)</label>
+                        <span asp-validation-for="PhuCapDictionary[i]" class="text-danger"></span>
+                    </div>
+                }
+
+                @if (Model.HoSoLuong.Id == 0)
+                {
+                    <div class="form-floating col-6 py-2">
+                        <input asp-for="HoSoLuong.NguoiTao" class="form-control border-0 shadow" />
+                        <label asp-for="HoSoLuong.NguoiTao" class="ms-2"></label>
+                        <span asp-validation-for="HoSoLuong.NguoiTao" class="text-danger"></span>
+                    </div>
+                } else
+                {
+                    <div class="form-floating col-6 py-2">
+                        <input asp-for="HoSoLuong.NguoiUpdate" class="form-control border-0 shadow" />
+                        <label asp-for="HoSoLuong.NguoiUpdate" class="ms-2"></label>
+                        <span asp-validation-for="HoSoLuong.NguoiUpdate" class="text-danger"></span>
+                    </div>
+                }
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">@(Model.HoSoLuong.Id == 0 ? "Thêm" : "Sửa")</button>
+
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="HoSoLuong" asp-action="Index" class="btn btn-outline-secondary form-control">
+                            Quay lại
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial"></partial>
+    }
+}

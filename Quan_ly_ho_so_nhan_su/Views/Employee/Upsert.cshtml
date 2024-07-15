@@ -1,0 +1,206 @@
+﻿@model EmployeeVM
+
+<div class="card shadow border-0 mt-5">
+	<div class="card-header bg-primary bg-gradient ml-0 py-3">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h2 class="text-white-50 py-2">@(Model.Employee.Id == 0 ? "Thêm" : "Sửa") nhân viên</h2>
+			</div>
+		</div>
+	</div>
+	<div class="card-body p-4">
+		<form method="post" class="row">
+			<input asp-for="Employee.Id" hidden />
+			<input asp-for="Employee.DiaChiId" hidden />
+
+			@* <span asp-validation-sumary="ModelOnly"></span> *@
+
+			<div class="border p-3 row">
+				<div class="form-floating col-6 py-2">
+					<input asp-for="Employee.Name" class="form-control border-0 shadow" />
+					<label asp-for="Employee.Name" class="ms-2"></label>
+					<span asp-validation-for="Employee.Name" class="text-danger"></span>
+				</div>
+				<div class="form-floating col-6 py-2">
+					<input asp-for="Employee.DiaChiDetail" class="form-control border-0 shadow" />
+					<label asp-for="Employee.DiaChiDetail" class="ms-2"></label>
+					<span asp-validation-for="Employee.DiaChiDetail" class="text-danger"></span>
+				</div>
+				<div class="form-floating col-6 py-2">
+					<input asp-for="Employee.Email" class="form-control border-0 shadow" type="email"/>
+					<label asp-for="Employee.Email" class="ms-2"></label>
+					<span asp-validation-for="Employee.Email" class="text-danger"></span>
+				</div>
+				<div class="form-floating col-6 py-2">
+					<input asp-for="Employee.PhoneNumber" class="form-control border-0 shadow" />
+					<label asp-for="Employee.PhoneNumber" class="ms-2"></label>
+					<span asp-validation-for="Employee.PhoneNumber" class="text-danger"></span>
+				</div>
+				<div class="form-floating col-6 py-2">
+					<select asp-items="Model.GenderList" asp-for="Employee.Gender" class="form-select border-0 shadow">
+						<option disabled selected>--Select Giới Tính--</option>
+					</select>
+					<label asp-for="Employee.Gender" class="ms-2"></label>
+					<span asp-validation-for="Employee.Gender" class="text-danger"></span>
+				</div>
+				<div class="form-floating col-6 py-2">
+					<input asp-for="Employee.DateOfBirth" class="form-control border-0 shadow" type="datetime-local" />
+					<label asp-for="Employee.DateOfBirth" class="ms-2"></label>
+					<span asp-validation-for="Employee.DateOfBirth" class="text-danger"></span>
+				</div>
+
+				<div class="form-floating col-6 py-2">
+					<select asp-items="Model.PhongBanList" asp-for="Employee.PhongBanId" class="form-select border-0 shadow" id="pb">
+						<option disabled selected>--Select Phòng Ban--</option>
+					</select>
+					<label asp-for="Employee.PhongBanId" class="ms-2"></label>
+					<span asp-validation-for="Employee.PhongBanId" class="text-danger"></span>
+				</div>
+				@if (Model.Employee.Id == 0)
+				{
+					<div class="form-floating col-6 py-2">
+						<select disabled asp-for="Employee.ChucDanhId" class="form-select border-0 shadow" id="cc">
+							<option disabled selected>--Select Chức Danh--</option>
+						</select>
+						<label asp-for="Employee.ChucDanhId" class="ms-2"></label>
+						<span asp-validation-for="Employee.ChucDanhId" class="text-danger"></span>
+					</div>
+				}
+				else
+				{
+					<div class="form-floating col-6 py-2">
+						<select asp-items="Model.ChucDanhList" asp-for="Employee.ChucDanhId" class="form-select border-0 shadow" id="cc">
+							<option disabled selected>--Select Chức Danh--</option>
+						</select>
+						<label asp-for="Employee.ChucDanhId" class="ms-2"></label>
+						<span asp-validation-for="Employee.ChucDanhId" class="text-danger"></span>
+					</div>
+				}
+
+				<div class="form-floating col-6 py-2">
+					<select asp-items="Model.NganHangList" asp-for="NganHangId" class="form-select border-0 shadow">
+						<option disabled selected>--Select Ngân Hàng--</option>
+					</select>
+					<label asp-for="NganHangId" class="ms-2"></label>
+					<span asp-validation-for="NganHangId" class="text-danger"></span>
+				</div>
+				@if (Model.Employee.Id == 0)
+				{
+					<div class="form-floating col-6 py-2">
+						<select asp-for="Employee.ChiNhanhNganHangId" class="form-select border-0 shadow" id="cnnh">
+							<option disabled selected>--Select Chi Nhánh Ngân Hàng--</option>
+						</select>
+						<label asp-for="Employee.ChiNhanhNganHangId" class="ms-2"></label>
+						<span asp-validation-for="Employee.ChiNhanhNganHangId" class="text-danger"></span>
+					</div>
+				}
+				else
+				{
+					<div class="form-floating col-6 py-2">
+						<select asp-items="Model.ChiNhanhNganHangList" asp-for="Employee.ChiNhanhNganHangId" class="form-select border-0 shadow" id="cnnh">
+							<option disabled selected>--Select Chi Nhánh Ngân Hàng--</option>
+						</select>
+						<label asp-for="Employee.ChiNhanhNganHangId" class="ms-2"></label>
+						<span asp-validation-for="Employee.ChiNhanhNganHangId" class="text-danger"></span>
+					</div>
+				}
+
+				@if (Model.Employee.Id == 0)
+				{
+					<div class="form-floating col-6 py-2">
+						<select asp-items="Model.QuocGiaList" asp-for="QuocGiaId" class="form-select border-0 shadow">
+							<option disabled selected>--Select Quốc Gia--</option>
+						</select>
+						<label asp-for="QuocGiaId" class="ms-2"></label>
+						<span asp-validation-for="QuocGiaId" class="text-danger"></span>
+					</div>
+					<div class="form-floating col-6 py-2">
+						<select disabled asp-for="TinhThanhId" class="form-select border-0 shadow">
+							<option disabled selected>--Select Tỉnh Thành--</option>
+						</select>
+						<label asp-for="TinhThanhId" class="ms-2"></label>
+						<span asp-validation-for="TinhThanhId" class="text-danger"></span>
+					</div>
+					<div class="form-floating col-6 py-2">
+						<select disabled asp-for="QuanHuyenId" class="form-select border-0 shadow">
+							<option disabled selected>--Select Quận Huyện--</option>
+						</select>
+						<label asp-for="QuanHuyenId" class="ms-2"></label>
+						<span asp-validation-for="QuanHuyenId" class="text-danger"></span>
+					</div>
+					<div class="form-floating col-6 py-2">
+						<select disabled asp-for="XaPhuongId" class="form-select border-0 shadow">
+							<option disabled selected>--Select Xã Phường--</option>
+						</select>
+						<label asp-for="XaPhuongId" class="ms-2"></label>
+						<span asp-validation-for="XaPhuongId" class="text-danger"></span>
+					</div>
+					<div class="form-floating col-12 py-2">
+						<input asp-for="Employee.NguoiTao" class="form-control border-0 shadow" />
+						<label asp-for="Employee.NguoiTao" class="ms-2"></label>
+						<span asp-validation-for="Employee.NguoiTao" class="text-danger"></span>
+					</div>
+				}
+				else
+				{
+					<div class="form-floating col-6 py-2">
+						<select asp-items="Model.QuocGiaList" asp-for="QuocGiaId" class="form-select border-0 shadow">
+							<option disabled selected>--Select Quốc Gia--</option>
+						</select>
+						<label asp-for="QuocGiaId" class="ms-2"></label>
+						<span asp-validation-for="QuocGiaId" class="text-danger"></span>
+					</div>
+					<div class="form-floating col-6 py-2">
+						<select asp-items="Model.TinhThanhList" asp-for="TinhThanhId" class="form-select border-0 shadow">
+							<option disabled selected>--Select Tỉnh Thành--</option>
+						</select>
+						<label asp-for="TinhThanhId" class="ms-2"></label>
+						<span asp-validation-for="TinhThanhId" class="text-danger"></span>
+					</div>
+					<div class="form-floating col-6 py-2">
+						<select asp-items="Model.QuanHuyenList" asp-for="QuanHuyenId" class="form-select border-0 shadow">
+							<option disabled selected>--Select Quận Huyện--</option>
+						</select>
+						<label asp-for="QuanHuyenId" class="ms-2"></label>
+						<span asp-validation-for="QuanHuyenId" class="text-danger"></span>
+					</div>
+					<div class="form-floating col-6 py-2">
+						<select asp-items="Model.XaPhuongList" asp-for="XaPhuongId" class="form-select border-0 shadow">
+							<option disabled selected>--Select Xã Phường--</option>
+						</select>
+						<label asp-for="XaPhuongId" class="ms-2"></label>
+						<span asp-validation-for="XaPhuongId" class="text-danger"></span>
+					</div>
+					<div class="form-floating col-12 py-2">
+						<input asp-for="Employee.NguoiUpdate" class="form-control border-0 shadow" />
+						<label asp-for="Employee.NguoiUpdate" class="ms-2"></label>
+						<span asp-validation-for="Employee.NguoiUpdate" class="text-danger"></span>
+					</div>
+				}
+
+				<div class="row pt-2">
+					<div class="col-6 col-md-3">
+						<button type="submit" class="btn btn-primary form-control">@(Model.Employee.Id == 0 ? "Thêm" : "Sửa")</button>
+
+					</div>
+					<div class="col-6 col-md-3">
+						<a asp-controller="Employee" asp-action="Index" class="btn btn-outline-secondary form-control">
+							Quay lại
+						</a>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial"></partial>
+	}
+
+	<script src="~/js/employeeUpsert.js">
+
+	</script>
+}

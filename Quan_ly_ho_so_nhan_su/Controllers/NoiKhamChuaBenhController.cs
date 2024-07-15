@@ -118,12 +118,12 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<NoiKhamChuaBenhView> chinhanhnganhangtable = _unitOfWork.NoiKhamChuaBenhTable.GetAll(includeProperties: "DiaChi")
-                .Select(n => new NoiKhamChuaBenhView
+            var chinhanhnganhangtable = _unitOfWork.NoiKhamChuaBenhTable.GetAll()
+                .Select(n => new
                 {
                     Id = n.Id,
                     Name = n.Name,
-                    DiaChi = n.DiaChiDetail + ", " + UtilClass.GetDiaChiFull(n.DiaChi.Id, _unitOfWork),
+                    DiaChi = n.DiaChiDetail + ", " + UtilClass.GetDiaChiFull(n.DiaChiId, _unitOfWork),
                     IsApplied = n.IsApplied,
                 }).ToList();
             return Json(new { data = chinhanhnganhangtable });

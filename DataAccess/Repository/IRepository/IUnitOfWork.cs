@@ -23,6 +23,13 @@ namespace DataAccess.Repository.IRepository
         public IPhongBanChucDanhRepository PhongBanChucDanhTable { get; }
         public IDiaChiRepository DiaChiTable { get; }
         public INoiKhamChuaBenhRepository NoiKhamChuaBenhTable { get; }
+        public IEmployeeRepository EmployeeTable { get; }
+        public IQuyetDinhDetailRepository QuyetDinhDetailTable { get; }
+        public IQuyetDinhRepository QuyetDinhTable { get; }
+        public IHopDongDetailRepository HopDongDetailTable { get; }
+        public IHoSoLuongRepository HoSoLuongTable { get; }
+        public IHoSoLuongPhuCapRepository HoSoLuongPhuCapTable { get; }
+        public IHoSoLuongCheDoPhucLoiRepository HoSoLuongCheDoPhucLoiTable { get; }
 
         void Save();
     }

@@ -126,8 +126,8 @@ namespace Quan_ly_ho_so_nhan_su.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            List<ChiNhanhNganHangView> chinhanhnganhangtable = _unitOfWork.ChiNhanhNganHangTable.GetAll(includeProperties: "NganHang,DiaChi")
-                .Select(c => new ChiNhanhNganHangView
+            var chinhanhnganhangtable = _unitOfWork.ChiNhanhNganHangTable.GetAll(includeProperties: "NganHang,DiaChi")
+                .Select(c => new 
                 {
                     Id = c.Id,
                     NganHangName = c.NganHang.Name,
