@@ -1,10 +1,13 @@
 ﻿using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Models;
+using Microsoft.AspNetCore.Authorization;
+using Utility;
 
 namespace Quan_ly_ho_so_nhan_su.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.ROLE_ADMIN)]
     public class NganHangController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

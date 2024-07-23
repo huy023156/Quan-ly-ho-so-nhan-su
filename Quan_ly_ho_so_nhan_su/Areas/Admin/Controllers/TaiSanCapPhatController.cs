@@ -1,10 +1,13 @@
 ﻿using DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
+using Utility;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
 namespace Quan_ly_ho_so_nhan_su.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.ROLE_ADMIN)]
     public class TaiSanCapPhatController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

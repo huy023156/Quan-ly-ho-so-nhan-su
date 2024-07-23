@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Models;
 using Models.ViewModels;
 using System.Diagnostics.Eventing.Reader;
+using Microsoft.AspNetCore.Authorization;
 using Utility;
 
 namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize(Roles = SD.ROLE_ADMIN + "," + SD.ROLE_EMPLOYEE)]
     public class HoSoLuongController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

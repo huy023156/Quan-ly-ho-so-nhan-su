@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace DataAccess.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -40,6 +42,8 @@ namespace DataAccess.Data
         public DbSet<DiaChi> DiaChiTable { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<ChucDanh>().HasData(
                 new ChucDanh { Id = 1, Name = "Giám đốc trung tâm" },
                 new ChucDanh { Id = 2, Name = "Phó giám đốc trung tâm" },

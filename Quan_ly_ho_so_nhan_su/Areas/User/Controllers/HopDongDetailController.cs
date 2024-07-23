@@ -2,11 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Models;
+using Utility;
 
 namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize(Roles = SD.ROLE_ADMIN + "," + SD.ROLE_EMPLOYEE)]
     public class HopDongDetailController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

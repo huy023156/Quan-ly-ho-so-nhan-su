@@ -1,4 +1,5 @@
 ﻿using DataAccess.Repository.IRepository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Models.ViewModels;
 using Models;
@@ -8,6 +9,7 @@ using Utility;
 namespace Quan_ly_ho_so_nhan_su.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.ROLE_ADMIN)]
     public class QuanHuyenController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

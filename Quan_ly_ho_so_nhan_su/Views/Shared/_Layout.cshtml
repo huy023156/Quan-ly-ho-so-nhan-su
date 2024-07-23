@@ -21,98 +21,103 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link text-white-50" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-white-50" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white-50" data-bs-auto-close="outside" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Quản lý danh mục
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="PhongBan" asp-action="Index">Phòng ban</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="ChucDanh" asp-action="Index">Chức danh</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="HopDong" asp-action="Index">Hợp đồng</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="PhuCap" asp-action="Index">Phụ cấp</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="TaiSanCapPhat" asp-action="Index">Tài sản cấp phát</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="CheDoPhucLoi" asp-action="Index">Chế độ phúc lợi</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="QuyetDinh" asp-action="Index">Quyết định</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="Admin" asp-controller="NoiKhamChuaBenh" asp-action="Index">Nơi khám chữa bệnh</a>
-                                </li>
-                                <li class="dropend">
-                                    <a class="nav-link dropdown-toggle text-muted px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Ngân hàng
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a class="dropdown-item" asp-area="Admin" asp-controller="NganHang" asp-action="Index">Danh sách ngân hàng</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="dropdown-item" asp-area="Admin" asp-controller="ChiNhanhNganHang" asp-action="Index">Chi nhanh ngân hàng</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="dropend">
-                                    <a class="nav-link dropdown-toggle text-muted px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        Danh mục tỉnh thành
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li class="nav-item">
-                                            <a class="dropdown-item" asp-area="Admin" asp-controller="QuocGia" asp-action="Index">Quốc gia</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="dropdown-item" asp-area="Admin" asp-controller="TinhThanh" asp-action="Index">Tỉnh thành</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="dropdown-item" asp-area="Admin" asp-controller="QuanHuyen" asp-action="Index">Quận Huyện</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="dropdown-item" asp-area="Admin" asp-controller="XaPhuong" asp-action="Index">Xã Phường</a>
-                                        </li>
-                                    </ul>
-                                </li>
-
-
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-white-50" data-bs-auto-close="outside" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Nghiệp vụ
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="User" asp-controller="Employee" asp-action="Index">Quản lí nhân viên</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="User" asp-controller="HoSoLuong" asp-action="Index">Quản lí hồ sơ lương</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="User" asp-controller="QuyetDinhDetail" asp-action="Index">Quản lí quyết định</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="dropdown-item" asp-area="User" asp-controller="HopDongDetail" asp-action="Index">Quản lí hợp đồng</a>
-                                </li>
-                            </ul>
-                        </li>
+                        @if (User.IsInRole(SD.ROLE_ADMIN))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white-50" data-bs-auto-close="outside" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Quản lý danh mục
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="PhongBan" asp-action="Index">Phòng ban</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="ChucDanh" asp-action="Index">Chức danh</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="HopDong" asp-action="Index">Hợp đồng</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="PhuCap" asp-action="Index">Phụ cấp</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="TaiSanCapPhat" asp-action="Index">Tài sản cấp phát</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="CheDoPhucLoi" asp-action="Index">Chế độ phúc lợi</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="QuyetDinh" asp-action="Index">Quyết định</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="Admin" asp-controller="NoiKhamChuaBenh" asp-action="Index">Nơi khám chữa bệnh</a>
+                                    </li>
+                                    <li class="dropend">
+                                        <a class="nav-link dropdown-toggle text-muted px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Ngân hàng
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="Admin" asp-controller="NganHang" asp-action="Index">Danh sách ngân hàng</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="Admin" asp-controller="ChiNhanhNganHang" asp-action="Index">Chi nhanh ngân hàng</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="dropend">
+                                        <a class="nav-link dropdown-toggle text-muted px-3" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            Danh mục tỉnh thành
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="Admin" asp-controller="QuocGia" asp-action="Index">Quốc gia</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="Admin" asp-controller="TinhThanh" asp-action="Index">Tỉnh thành</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="Admin" asp-controller="QuanHuyen" asp-action="Index">Quận Huyện</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="dropdown-item" asp-area="Admin" asp-controller="XaPhuong" asp-action="Index">Xã Phường</a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        @if (User.IsInRole(SD.ROLE_ADMIN) || User.IsInRole(SD.ROLE_EMPLOYEE))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle text-white-50" data-bs-auto-close="outside" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Nghiệp vụ
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="User" asp-controller="Employee" asp-action="Index">Quản lí nhân viên</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="User" asp-controller="HoSoLuong" asp-action="Index">Quản lí hồ sơ lương</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="User" asp-controller="QuyetDinhDetail" asp-action="Index">Quản lí quyết định</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="User" asp-controller="HopDongDetail" asp-action="Index">Quản lí hợp đồng</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
                     </ul>
+                    <partial name="_loginPartial"></partial>
                 </div>
             </div>
         </nav>

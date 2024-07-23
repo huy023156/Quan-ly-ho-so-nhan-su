@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Models;
 using Utility;
 
 namespace Quan_ly_ho_so_nhan_su.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.ROLE_ADMIN)]
     public class NoiKhamChuaBenhController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

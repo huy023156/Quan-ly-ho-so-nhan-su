@@ -2,10 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using Models;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Microsoft.AspNetCore.Authorization;
+using Utility;
 
 namespace Quan_ly_ho_so_nhan_su.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.ROLE_ADMIN)]
     public class ChucDanhController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

@@ -2,6 +2,9 @@ using DataAccess.Data;
 using DataAccess.Repository.IRepository;
 using DataAccess.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Utility;
+using Microsoft.AspNetCore.Identity.UI.Services;
 
 
 namespace Quan_ly_ho_so_nhan_su
@@ -16,8 +19,18 @@ namespace Quan_ly_ho_so_nhan_su
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
+
+            builder.Services.ConfigureApplicationCookie(options => {
+                options.LoginPath = $"/Identity/Account/Login";
+                options.LogoutPath = $"/Identity/Account/Logout";
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+            });
+
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+            builder.Services.AddScoped<IEmailSender, EmailSender>();
+            builder.Services.AddRazorPages();
 
             var app = builder.Build();
 
@@ -34,8 +47,9 @@ namespace Quan_ly_ho_so_nhan_su
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
-
+            app.MapRazorPages();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{area=User}/{controller=Home}/{action=Index}/{id?}");

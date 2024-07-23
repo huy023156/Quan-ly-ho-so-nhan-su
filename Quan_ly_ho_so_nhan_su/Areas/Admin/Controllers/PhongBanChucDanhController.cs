@@ -1,12 +1,15 @@
 ﻿using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Authorization;
+using Utility;
 using Models;
 using Models.ViewModels;
 
 namespace Quan_ly_ho_so_nhan_su.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.ROLE_ADMIN)]
     public class PhongBanChucDanhController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

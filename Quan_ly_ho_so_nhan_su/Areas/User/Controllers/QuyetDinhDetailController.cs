@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Models.ViewModels;
 using Models;
+using Microsoft.AspNetCore.Authorization;
+using Utility;
 
 namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize(Roles = SD.ROLE_ADMIN + "," + SD.ROLE_EMPLOYEE)]
     public class QuyetDinhDetailController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

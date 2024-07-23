@@ -17,10 +17,212 @@ namespace DataAccess.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetRoleClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedEmail")
+                        .HasDatabaseName("EmailIndex");
+
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasDatabaseName("UserNameIndex")
+                        .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.ToTable("AspNetUsers", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ClaimType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ClaimValue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserClaims", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderKey")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("ProviderDisplayName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("LoginProvider", "ProviderKey");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("AspNetUserLogins", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("LoginProvider")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(128)
+                        .HasColumnType("nvarchar(128)");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("UserId", "LoginProvider", "Name");
+
+                    b.ToTable("AspNetUserTokens", (string)null);
+                });
 
             modelBuilder.Entity("Models.CheDoPhucLoi", b =>
                 {
@@ -325,7 +527,7 @@ namespace DataAccess.Migrations
                             Gender = true,
                             IsApplied = true,
                             Name = "Nguyen Quang Huy",
-                            NgayTao = new DateTime(2024, 7, 16, 16, 41, 58, 97, DateTimeKind.Local).AddTicks(4841),
+                            NgayTao = new DateTime(2024, 7, 23, 9, 40, 22, 446, DateTimeKind.Local).AddTicks(8968),
                             NguoiTao = "Admin",
                             PhoneNumber = "0369694076",
                             PhongBanId = 1
@@ -342,7 +544,7 @@ namespace DataAccess.Migrations
                             Gender = false,
                             IsApplied = true,
                             Name = "Nguyen Phuong Mai",
-                            NgayTao = new DateTime(2024, 7, 16, 16, 41, 58, 97, DateTimeKind.Local).AddTicks(4854),
+                            NgayTao = new DateTime(2024, 7, 23, 9, 40, 22, 446, DateTimeKind.Local).AddTicks(9133),
                             NguoiTao = "Admin",
                             PhoneNumber = "0123485682",
                             PhongBanId = 2
@@ -401,7 +603,7 @@ namespace DataAccess.Migrations
                             EmployeeId = 1,
                             IsApplied = true,
                             LuongCoBan = 20000,
-                            NgayTao = new DateTime(2024, 7, 16, 16, 41, 58, 97, DateTimeKind.Local).AddTicks(4882),
+                            NgayTao = new DateTime(2024, 7, 23, 9, 40, 22, 446, DateTimeKind.Local).AddTicks(9199),
                             NguoiTao = "Admin",
                             RanhLuongMax = 150000,
                             RanhLuongMin = 70000
@@ -413,7 +615,7 @@ namespace DataAccess.Migrations
                             EmployeeId = 2,
                             IsApplied = true,
                             LuongCoBan = 16000,
-                            NgayTao = new DateTime(2024, 7, 16, 16, 41, 58, 97, DateTimeKind.Local).AddTicks(4884),
+                            NgayTao = new DateTime(2024, 7, 23, 9, 40, 22, 446, DateTimeKind.Local).AddTicks(9201),
                             NguoiTao = "Admin",
                             RanhLuongMax = 100000,
                             RanhLuongMin = 50000
@@ -661,7 +863,7 @@ namespace DataAccess.Migrations
                             IsApplied = true,
                             NgayBatDau = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayKetThuc = new DateTime(2025, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2024, 7, 16, 16, 41, 58, 97, DateTimeKind.Local).AddTicks(5014),
+                            NgayTao = new DateTime(2024, 7, 23, 9, 40, 22, 446, DateTimeKind.Local).AddTicks(9360),
                             NguoiTao = "Admin",
                             QuyetDinhDetailId = 1
                         },
@@ -674,7 +876,7 @@ namespace DataAccess.Migrations
                             IsApplied = true,
                             NgayBatDau = new DateTime(2023, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayKetThuc = new DateTime(2025, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2024, 7, 16, 16, 41, 58, 97, DateTimeKind.Local).AddTicks(5017),
+                            NgayTao = new DateTime(2024, 7, 23, 9, 40, 22, 446, DateTimeKind.Local).AddTicks(9363),
                             NguoiTao = "Admin",
                             QuyetDinhDetailId = 2
                         });
@@ -1245,7 +1447,7 @@ namespace DataAccess.Migrations
                             NgayHetHieuLuc = new DateTime(2025, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayHieuLuc = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayQuyetDinh = new DateTime(2023, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2024, 7, 16, 16, 41, 58, 97, DateTimeKind.Local).AddTicks(4978),
+                            NgayTao = new DateTime(2024, 7, 23, 9, 40, 22, 446, DateTimeKind.Local).AddTicks(9319),
                             NguoiTao = "Admin",
                             NoiDung = "Tuyển dụng anh Huy vào vị trí Giám đốc",
                             QuyetDinhId = 1
@@ -1257,7 +1459,7 @@ namespace DataAccess.Migrations
                             NgayHetHieuLuc = new DateTime(2025, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayHieuLuc = new DateTime(2023, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayQuyetDinh = new DateTime(2023, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2024, 7, 16, 16, 41, 58, 97, DateTimeKind.Local).AddTicks(4981),
+                            NgayTao = new DateTime(2024, 7, 23, 9, 40, 22, 446, DateTimeKind.Local).AddTicks(9322),
                             NguoiTao = "Admin",
                             NoiDung = "Tuyển dụng chị Mai vào vị trí Phó giám đốc",
                             QuyetDinhId = 1
@@ -1439,6 +1641,57 @@ namespace DataAccess.Migrations
                             Name = "Yên Hòa",
                             QuanHuyenId = 4
                         });
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Models.ChiNhanhNganHang", b =>

@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Models.ViewModels;
 using Models;
 using Utility;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Quan_ly_ho_so_nhan_su.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.ROLE_ADMIN)]
     public class XaPhuongController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

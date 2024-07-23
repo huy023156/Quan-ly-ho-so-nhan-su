@@ -2,12 +2,14 @@
 using DataAccess.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 using Models;
 using Utility;
 
 namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 {
     [Area("User")]
+    [Authorize(Roles = SD.ROLE_ADMIN + "," + SD.ROLE_EMPLOYEE)]
     public class ApiController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
