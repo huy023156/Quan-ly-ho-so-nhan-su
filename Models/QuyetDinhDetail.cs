@@ -31,5 +31,6 @@ namespace Models
         public string? NguoiTao { get; set; }
         public string? NguoiUpdate { get; set; }
 
+        public bool IsApplied { get; set; } = true;
     }
 }

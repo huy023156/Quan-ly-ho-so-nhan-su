@@ -3,7 +3,7 @@
         var quocGiaId = $(this).val();
         if (quocGiaId) {
             $.ajax({
-                url: '/api/GetTinhThanhListByQuocGiaId/' + quocGiaId,
+                url: '/User/api/GetTinhThanhListByQuocGiaId/' + quocGiaId,
                 type: "GET",
                 success: function (response) {
                     $('#QuanHuyen_TinhThanhId').empty().append($('<option>', {

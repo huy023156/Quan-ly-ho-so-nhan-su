@@ -7,7 +7,7 @@ $(document).ready(function () {
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
         responsive: true,
-        "ajax": { url: 'ChucDanh/GetAll' },
+        "ajax": { url: '/Admin/ChucDanh/GetAll' },
         "columns": [
             { data: 'name', width: '50%'},
             {
@@ -21,8 +21,8 @@ function loadDataTable() {
                 data: 'id',
                 "render": function (data, type, row) {
                     return `<div class="w-100 btn-group ms-auto btn-group-equal" role="group">
-                                <a href="/ChucDanh/Upsert?id=${data}" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Sửa</a>
-                                <a onClick="Delete('/ChucDanh/Delete/${data}')" class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i> Xóa</a>
+                                <a href="/Admin/ChucDanh/Upsert?id=${data}" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Sửa</a>
+                                <a onClick="Delete('/Admin/ChucDanh/Delete/${data}')" class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i> Xóa</a>
                                 <a onClick="ToggleApply(${data}, ${row.isApplied})" class="btn btn-${row.isApplied ? 'warning' : 'success'} mx-2">
                                     <i class="bi bi-${row.isApplied ? 'x-circle' : 'check-circle'}"></i> ${row.isApplied ? 'Ngừng áp dụng' : 'Áp dụng'}
                                 </a>
@@ -69,7 +69,7 @@ function ToggleApply(id, isApplied) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '/ChucDanh/ToggleApply',
+                url: '/Admin/ChucDanh/ToggleApply',
                 type: 'POST',
                 data: { id: id },
                 success: function (data) {

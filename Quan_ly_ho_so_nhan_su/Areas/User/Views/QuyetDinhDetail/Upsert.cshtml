@@ -1,0 +1,81 @@
+﻿@model QuyetDinhDetailVM
+
+<div class="card shadow border-0 mt-5">
+    <div class="card-header bg-primary bg-gradient ml-0 py-3">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h2 class="text-white-50 py-2">@(Model.QuyetDinhDetail.Id == 0 ? "Thêm" : "Sửa") quyết định</h2>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-4">
+        <form method="post" class="row">
+            <input asp-for="QuyetDinhDetail.Id" hidden />
+            @* <span asp-validation-sumary="ModelOnly"></span> *@
+
+            <div class="border p-3">
+                <div class="form-floating col-12 py-2">
+                    <select asp-items="Model.QuyetDinhList" asp-for="QuyetDinhDetail.QuyetDinhId" class="form-select border-0 shadow">
+                        <option disabled selected>--Select Quyết Định--</option>
+                    </select>
+                    <label asp-for="QuyetDinhDetail.QuyetDinhId" class="ms-2"></label>
+                    <span asp-validation-for="QuyetDinhDetail.QuyetDinhId" class="text-danger"></span>
+                </div>
+                <div class="form-floating col-12 py-2">
+                    <input asp-for="QuyetDinhDetail.NoiDung" class="form-control border-0 shadow" />
+                    <label asp-for="QuyetDinhDetail.NoiDung" class="ms-2"></label>
+                    <span asp-validation-for="QuyetDinhDetail.NoiDung" class="text-danger"></span>
+                </div>
+                <div class="form-floating col-12 py-2">
+					<input asp-for="QuyetDinhDetail.NgayQuyetDinh" class="form-control border-0 shadow" type="datetime-local" />
+					<label asp-for="QuyetDinhDetail.NgayQuyetDinh" class="ms-2"></label>
+					<span asp-validation-for="QuyetDinhDetail.NgayQuyetDinh" class="text-danger"></span>
+                </div><div class="form-floating col-12 py-2">
+                    <input asp-for="QuyetDinhDetail.NgayHieuLuc" class="form-control border-0 shadow" type="datetime-local" />
+                    <label asp-for="QuyetDinhDetail.NgayHieuLuc" class="ms-2"></label>
+                    <span asp-validation-for="QuyetDinhDetail.NgayHieuLuc" class="text-danger"></span>
+                </div><div class="form-floating col-12 py-2">
+                    <input asp-for="QuyetDinhDetail.NgayHetHieuLuc" class="form-control border-0 shadow" type="datetime-local" />
+                    <label asp-for="QuyetDinhDetail.NgayHetHieuLuc" class="ms-2"></label>
+                    <span asp-validation-for="QuyetDinhDetail.NgayHetHieuLuc" class="text-danger"></span>
+                </div>
+
+                @if (Model.QuyetDinhDetail.Id == 0)
+                {
+                    <div class="form-floating col-12 py-2">
+                        <input asp-for="QuyetDinhDetail.NguoiTao" class="form-control border-0 shadow" />
+                        <label asp-for="QuyetDinhDetail.NguoiTao" class="ms-2"></label>
+                        <span asp-validation-for="QuyetDinhDetail.NguoiTao" class="text-danger"></span>
+                    </div>
+                }
+                else
+                {
+                    <div class="form-floating col-12 py-2">
+                        <input asp-for="QuyetDinhDetail.NguoiUpdate" class="form-control border-0 shadow" />
+                        <label asp-for="QuyetDinhDetail.NguoiUpdate" class="ms-2"></label>
+                        <span asp-validation-for="QuyetDinhDetail.NguoiUpdate" class="text-danger"></span>
+                    </div>
+                }
+
+                <div class="row pt-2">
+                    <div class="col-6 col-md-3">
+                        <button type="submit" class="btn btn-primary form-control">@(Model.QuyetDinhDetail.Id == 0 ? "Thêm" : "Sửa")</button>
+
+                    </div>
+                    <div class="col-6 col-md-3">
+                        <a asp-controller="QuyetDinhDetail" asp-action="Index" class="btn btn-outline-secondary form-control">
+                            Quay lại
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial"></partial>
+    }
+}

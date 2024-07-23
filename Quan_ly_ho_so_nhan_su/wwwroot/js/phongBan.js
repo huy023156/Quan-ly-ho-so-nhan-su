@@ -6,12 +6,12 @@ $(document).ready(function () {
 
 function loadDataTable() {
     dataTable = $('#tblData').DataTable({
-        "ajax": { url: 'PhongBan/GetAll' },
+        "ajax": { url: '/Admin/PhongBan/GetAll' },
         "columns": [
             {
                 data: 'name',
                 "render": function (data, type, row) {
-                    return `<a href="/PhongBanChucDanh/Index/${row.id}" class="text-decoration-none">
+                    return `<a href="/Admin/PhongBanChucDanh/Index/${row.id}" class="text-decoration-none">
                                 ${data} <i class="bi bi-eye"></i>
                             </a>`;
                 },
@@ -28,8 +28,8 @@ function loadDataTable() {
                 data: 'id',
                 "render": function (data, type, row) {
                     return `<div class="w-100 btn-group ms-auto btn-group-equal" role="group">
-                                <a href="/PhongBan/Upsert?id=${data}" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Sửa</a>
-                                <a onClick="Delete('/PhongBan/Delete/${data}')" class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i> Xóa</a>
+                                <a href="/Admin/PhongBan/Upsert?id=${data}" class="btn btn-primary mx-2"><i class="bi bi-pencil-square"></i> Sửa</a>
+                                <a onClick="Delete('/Admin/PhongBan/Delete/${data}')" class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i> Xóa</a>
                                 <a onClick="ToggleApply(${data}, ${row.isApplied})" class="btn btn-${row.isApplied ? 'warning' : 'success'} mx-2">
                                     <i class="bi bi-${row.isApplied ? 'x-circle' : 'check-circle'}"></i> ${row.isApplied ? 'Ngừng áp dụng' : 'Áp dụng'}
                                 </a>
@@ -76,7 +76,7 @@ function ToggleApply(id, isApplied) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '/PhongBan/ToggleApply',
+                url: '/Admin/PhongBan/ToggleApply',
                 type: 'POST',
                 data: { id: id },
                 success: function (data) {

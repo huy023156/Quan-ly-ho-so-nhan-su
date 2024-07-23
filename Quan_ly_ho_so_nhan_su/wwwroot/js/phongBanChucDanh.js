@@ -1,4 +1,4 @@
-﻿var dataTable;
+﻿ var dataTable;
 
 $(document).ready(function () {
     loadDataTable();
@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 function loadDataTable() {
     var id = $('#phongBanId').val();
-    var url = `/PhongBanChucDanh/GetChucDanhList/${id}`;
+    var url = `/Admin/PhongBanChucDanh/GetChucDanhList/${id}`;
 
     dataTable = $('#tblData').DataTable({
         "ajax": {
@@ -26,7 +26,7 @@ function loadDataTable() {
                 data: 'id',
                 "render": function (data, type, row) {
                     return `<div class="w-100 btn-group ms-auto" role="group">
-                                <a onClick="Delete('/PhongBanChucDanh/Delete/?phongBanId=${id}&chucDanhId=${data}')" class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i> Xóa</a>
+                                <a onClick="Delete('/Admin/PhongBanChucDanh/Delete/?phongBanId=${id}&chucDanhId=${data}')" class="btn btn-danger mx-2"><i class="bi bi-trash-fill"></i> Xóa</a>
                             </div>`;
                 },
                 width: '20%'
