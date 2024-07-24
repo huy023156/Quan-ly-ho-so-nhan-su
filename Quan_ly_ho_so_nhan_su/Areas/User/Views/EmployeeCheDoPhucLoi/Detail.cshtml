@@ -1,0 +1,70 @@
+﻿@model Employee
+
+<div class="card shadow border-0 mt-5">
+    <input type="hidden" id="pl_employeeId" value="@Model.Id" />
+    <div class="card-header bg-primary bg-gradient ml-0 py-3">
+        <div class="col-12 text-center">
+            <h2 class="text-white-50 py-2">Chế độ phúc lợi của @Model.Name</h2>
+        </div>
+    </div>
+    <div class="card-body shadow p-4">
+        <table id="tblData" class="table table-bordered table-striped compact">
+            <thead>
+                <tr>
+                    <th>Tên</th>
+                    <th>Số lượng</th>
+                </tr>
+            </thead>
+        </table>
+        <div class="row pt-2">
+            <div class="col-6 col-md-3">
+                <a asp-controller="EmployeeCheDoPhucLoi" asp-action="Index" class="btn btn-outline-secondary form-control">
+                    Quay lại
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script @* src="~/js/quyetDinhDetail.js" *@>
+        var dataTable;
+
+        $(document).ready(function () {
+            loadDataTable();
+        });
+
+        var id = $('#pl_employeeId').val();
+
+        function loadDataTable() {
+            var url = `/User/EmployeeCheDoPhucLoi/GetCheDoPhucLoiListByEmployeeId/${id}`;
+            dataTable = $('#tblData').DataTable({
+                "ajax": { url: url },
+                "columns": [
+                    { data: 'name', width: '40%' },
+                    {
+                        data: 'amount',
+                        "render": function (data, type, row) {
+                            return `<input type="number" class="form-control text-center" value="${row.amount}" onchange="updateAmount(${row.cheDoPhucLoiId}, this.value)">`;
+                        },
+                        width: '40%'
+                    },
+                ]
+            });
+        }
+
+        function updateAmount(cheDoPhucLoiId, newAmount) {
+            var url = `/User/EmployeeCheDoPhucLoi/UpdateAmount/?employeeId=${id}&cheDoPhucLoiId=${cheDoPhucLoiId}&newAmount=${newAmount}`;
+            $.ajax({
+                url: url,
+                type: 'POST',
+                success: function (data) {
+                    dataTable.ajax.reload();
+                },
+                error: function (data) {
+                    toastr.error(data.responseJSON.message);
+                }
+            });
+        }
+    </script>
+}

@@ -1,0 +1,47 @@
+﻿<div class="card shadow border-0 mt-5">
+    <div class="card-header bg-primary bg-gradient ml-0 py-3">
+        <div class="col-12 text-center">
+            <h2 class="text-white-50 py-2">Quản lý phụ cấp</h2>
+        </div>
+    </div>
+    <div class="card-body shadow p-4">
+        <table id="tblData" class="table table-bordered table-striped compact">
+            <thead>
+                <tr>
+                    <th>Tên</th>
+                    <th>Danh sách phụ cấp</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script @* src="~/js/quyetDinhDetail.js" *@>
+        var dataTable;
+
+        $(document).ready(function () {
+            loadDataTable();
+        });
+
+        function loadDataTable() {
+            dataTable = $('#tblData').DataTable({
+                "ajax": { url: '/User/EmployeePhuCap/GetAll' },
+                "columns": [
+                    { data: 'name', width: '40%' },
+                    { data: 'list', width: '40%' },
+                    {
+                        data: 'id',
+                        "render": function (data) {
+                            return `<div class="w-100 btn-group ms-auto btn-group-equal" role="group">
+                                         <a href="/User/EmployeePhuCap/Detail/${data}" class="btn btn-primary mx-2"><i class="bi bi-eye"></i> Chi tiết</a>
+                                    </div>`;
+                        },
+                        width: '20%'
+                    }
+                ]
+            });
+        }
+    </script>
+}

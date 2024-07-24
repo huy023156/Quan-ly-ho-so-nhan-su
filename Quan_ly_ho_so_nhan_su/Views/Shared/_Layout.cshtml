@@ -94,7 +94,7 @@
                                 </ul>
                             </li>
                         }
-                        @if (User.IsInRole(SD.ROLE_ADMIN) || User.IsInRole(SD.ROLE_EMPLOYEE))
+                        @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-white-50" data-bs-auto-close="outside" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -112,6 +112,15 @@
                                     </li>
                                     <li class="nav-item">
                                         <a class="dropdown-item" asp-area="User" asp-controller="HopDongDetail" asp-action="Index">Quản lí hợp đồng</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="User" asp-controller="EmployeeTaiSanCapPhat" asp-action="Index">Quản lí tài sản cấp phát</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="User" asp-controller="EmployeePhuCap" asp-action="Index">Quản lí phụ cấp</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item" asp-area="User" asp-controller="EmployeeCheDoPhucLoi" asp-action="Index">Quản lí chế độ phúc lợi</a>
                                     </li>
                                 </ul>
                             </li>

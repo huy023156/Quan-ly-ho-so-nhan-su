@@ -10,7 +10,7 @@ using Utility;
 namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 {
     [Area("User")]
-    [Authorize(Roles = SD.ROLE_ADMIN + "," + SD.ROLE_EMPLOYEE)]
+    [Authorize]
     public class HoSoLuongController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -30,9 +30,11 @@ namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
             List<int> employeeIdHasHoSoLuong = _unitOfWork.HoSoLuongTable.GetAll().Select(x => x.EmployeeId).ToList();
             Dictionary<int, string> phuCapNameDictionary = new Dictionary<int, string>();
             Dictionary<int, int?> phuCapDictionary = new Dictionary<int, int?>();
+            Dictionary<int, string> phucLoiNameDictionary = new Dictionary<int, string>();
+            Dictionary<int, int?> phucLoiDictionary = new Dictionary<int, int?>();
 
             var phuCapTableArray = _unitOfWork.PhuCapTable.GetAll().ToArray();
-
+            var phucLoiTableArray = _unitOfWork.CheDoPhucLoiTable.GetAll().ToArray();
 
 
             HoSoLuongVM hoSoLuongVM = new HoSoLuongVM()
@@ -55,6 +57,15 @@ namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 
                 hoSoLuongVM.PhuCapDictionary = phuCapDictionary;
                 hoSoLuongVM.PhuCapNameDictionary = phuCapNameDictionary;
+
+                for (int i = 0; i < phucLoiTableArray.Length; i++)
+                {
+                    phucLoiNameDictionary[phucLoiTableArray[i].Id] = phucLoiTableArray[i].Name;
+                    phucLoiDictionary[phucLoiTableArray[i].Id] = null;
+                }
+
+                hoSoLuongVM.PhucLoiDictionary = phucLoiDictionary;
+                hoSoLuongVM.PhucLoiNameDictionary = phucLoiNameDictionary;
             }
             else
             {
@@ -66,6 +77,15 @@ namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 
                 hoSoLuongVM.PhuCapDictionary = phuCapDictionary;
                 hoSoLuongVM.PhuCapNameDictionary = phuCapNameDictionary;
+
+                for (int i = 0; i < phucLoiTableArray.Length; i++)
+                {
+                    phucLoiNameDictionary[phucLoiTableArray[i].Id] = phucLoiTableArray[i].Name;
+                    phucLoiDictionary[phucLoiTableArray[i].Id] = _unitOfWork.HoSoLuongCheDoPhucLoiTable.Get(u => u.HoSoLuongId == id && u.CheDoPhucLoiId == phucLoiTableArray[i].Id)?.Amount;
+                }
+
+                hoSoLuongVM.PhucLoiDictionary = phucLoiDictionary;
+                hoSoLuongVM.PhucLoiNameDictionary = phucLoiNameDictionary;
 
                 hoSoLuongVM.HoSoLuong = _unitOfWork.HoSoLuongTable.Get(u => u.Id == id);
                 employeeIdHasHoSoLuong.Remove(hoSoLuongVM.HoSoLuong.EmployeeId);
@@ -86,6 +106,22 @@ namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
             {
                 ModelState.AddModelError("HoSoLuong.RanhLuongMin", "Ranh lương min không được cao hơn ranh lương max");
                 ModelState.AddModelError("HoSoLuong.RanhLuongMax", "Ranh lương max không được cao hơn ranh lương min");
+            }
+
+            foreach (int key in hoSoLuongVM.PhuCapDictionary.Keys)
+            {
+                if (hoSoLuongVM.PhuCapDictionary[key] < 0)
+                {
+                    ModelState.AddModelError($"PhuCapDictionary[{key}]", "Giá trị không được âm");
+                }
+            }
+
+            foreach (int key in hoSoLuongVM.PhucLoiDictionary.Keys)
+            {
+                if (hoSoLuongVM.PhucLoiDictionary[key] < 0)
+                {
+                    ModelState.AddModelError($"PhucLoiDictionary[{key}]", "Giá trị không được âm");
+                }
             }
 
             if (ModelState.IsValid)
@@ -109,6 +145,22 @@ namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 
 
                             _unitOfWork.HoSoLuongPhuCapTable.Add(hoSoLuongPhuCap);
+                        }
+                    }
+
+                    foreach (int key in hoSoLuongVM.PhucLoiDictionary.Keys)
+                    {
+                        if (hoSoLuongVM.PhucLoiDictionary[key] != 0 && hoSoLuongVM.PhucLoiDictionary[key] != null)
+                        {
+                            HoSoLuongCheDoPhucLoi hoSoLuongCheDoPhucLoi = new HoSoLuongCheDoPhucLoi()
+                            {
+                                CheDoPhucLoiId = key,
+                                HoSoLuongId = hoSoLuongVM.HoSoLuong.Id,
+                                Amount = (int)hoSoLuongVM.PhucLoiDictionary[key],
+                            };
+
+
+                            _unitOfWork.HoSoLuongCheDoPhucLoiTable.Add(hoSoLuongCheDoPhucLoi);
                         }
                     }
 
@@ -142,6 +194,30 @@ namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
                         }
                     }
 
+                    foreach (int key in hoSoLuongVM.PhucLoiDictionary.Keys)
+                    {
+                        if (hoSoLuongVM.PhucLoiDictionary[key] != 0 && hoSoLuongVM.PhucLoiDictionary[key] != null)
+                        {
+                            HoSoLuongCheDoPhucLoi hoSoLuongCheDoPhucLoi = _unitOfWork.HoSoLuongCheDoPhucLoiTable.Get(u => u.CheDoPhucLoiId == key && u.HoSoLuongId == hoSoLuongVM.HoSoLuong.Id);
+
+                            if (hoSoLuongCheDoPhucLoi == null)
+                            {
+                                hoSoLuongCheDoPhucLoi = new HoSoLuongCheDoPhucLoi()
+                                {
+                                    CheDoPhucLoiId = key,
+                                    HoSoLuongId = hoSoLuongVM.HoSoLuong.Id,
+                                    Amount = (int)hoSoLuongVM.PhucLoiDictionary[key],
+                                };
+                                _unitOfWork.HoSoLuongCheDoPhucLoiTable.Add(hoSoLuongCheDoPhucLoi);
+                            }
+                            else
+                            {
+                                hoSoLuongCheDoPhucLoi.Amount = (int)hoSoLuongVM.PhucLoiDictionary[key];
+                                _unitOfWork.HoSoLuongCheDoPhucLoiTable.Update(hoSoLuongCheDoPhucLoi);
+                            }
+                        }
+                    }
+
                     hoSoLuongVM.HoSoLuong.NgayUpdate = DateTime.Now;
 
 
@@ -157,8 +233,11 @@ namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
             {
                 List<int> employeeIdHasHoSoLuong = _unitOfWork.HoSoLuongTable.GetAll().Select(x => x.EmployeeId).ToList();
                 var phuCapTableArray = _unitOfWork.PhuCapTable.GetAll().ToArray();
+                var phucLoiTableArray = _unitOfWork.CheDoPhucLoiTable.GetAll().ToArray();
                 Dictionary<int, string> phuCapNameDictionary = new Dictionary<int, string>();
-                Dictionary<int, int?> phuCapDictionary = new Dictionary<int, int?>();
+                Dictionary<int, int?> phuCapDictionary = new Dictionary<int, int?>(); 
+                Dictionary<int, string> phucLoiNameDictionary = new Dictionary<int, string>();
+                Dictionary<int, int?> phucLoiDictionary = new Dictionary<int, int?>();
 
                 if (hoSoLuongVM.HoSoLuong.Id == 0)
                 {
@@ -167,6 +246,7 @@ namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
                         Value = e.Id.ToString(),
                         Text = e.Name + " " + e.Email,
                     });
+
                     for (int i = 0; i < phuCapTableArray.Length; i++)
                     {
                         phuCapNameDictionary[phuCapTableArray[i].Id] = phuCapTableArray[i].Name;
@@ -175,6 +255,15 @@ namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 
                     hoSoLuongVM.PhuCapDictionary = phuCapDictionary;
                     hoSoLuongVM.PhuCapNameDictionary = phuCapNameDictionary;
+
+                    for (int i = 0; i < phucLoiTableArray.Length; i++)
+                    {
+                        phucLoiNameDictionary[phucLoiTableArray[i].Id] = phucLoiTableArray[i].Name;
+                        phucLoiDictionary[phucLoiTableArray[i].Id] = null;
+                    }
+
+                    hoSoLuongVM.PhucLoiDictionary = phucLoiDictionary;
+                    hoSoLuongVM.PhucLoiNameDictionary = phucLoiNameDictionary;
                 }
                 else
                 {
@@ -186,6 +275,15 @@ namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 
                     hoSoLuongVM.PhuCapDictionary = phuCapDictionary;
                     hoSoLuongVM.PhuCapNameDictionary = phuCapNameDictionary;
+
+                    for (int i = 0; i < phucLoiTableArray.Length; i++)
+                    {
+                        phucLoiNameDictionary[phucLoiTableArray[i].Id] = phucLoiTableArray[i].Name;
+                        phucLoiDictionary[phucLoiTableArray[i].Id] = _unitOfWork.HoSoLuongCheDoPhucLoiTable.Get(u => u.HoSoLuongId == hoSoLuongVM.HoSoLuong.Id && u.CheDoPhucLoiId == phucLoiTableArray[i].Id)?.Amount;
+                    }
+
+                    hoSoLuongVM.PhucLoiDictionary = phucLoiDictionary;
+                    hoSoLuongVM.PhucLoiNameDictionary = phucLoiNameDictionary;
 
                     employeeIdHasHoSoLuong.Remove(hoSoLuongVM.HoSoLuong.EmployeeId);
                     hoSoLuongVM.EmployeeList = _unitOfWork.EmployeeTable.GetAll(u => !employeeIdHasHoSoLuong.Contains(u.Id)).Select(e => new SelectListItem

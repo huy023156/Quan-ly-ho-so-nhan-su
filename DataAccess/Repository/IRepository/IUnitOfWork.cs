@@ -30,6 +30,7 @@ namespace DataAccess.Repository.IRepository
         public IHoSoLuongRepository HoSoLuongTable { get; }
         public IHoSoLuongPhuCapRepository HoSoLuongPhuCapTable { get; }
         public IHoSoLuongCheDoPhucLoiRepository HoSoLuongCheDoPhucLoiTable { get; }
+        public IEmployeeTaiSanCapPhatRepository EmployeeTaiSanCapPhatTable { get; }
 
         void Save();
     }

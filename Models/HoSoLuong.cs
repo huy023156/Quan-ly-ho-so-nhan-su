@@ -13,11 +13,15 @@ namespace Models
     {
         [Key]
         public int Id { get; set; }
+        [Range(0, int.MaxValue, ErrorMessage = "Giá trị không được âm")]
         public float BacLuong { get; set; }
+        [Range(0, int.MaxValue, ErrorMessage = "Giá trị không được âm")]
         public int LuongCoBan {  get; set; }
+        [Range(0, int.MaxValue, ErrorMessage = "Giá trị không được âm")]
         public int RanhLuongMin { get; set; }
+        [Range(0, int.MaxValue, ErrorMessage = "Giá trị không được âm")]
         public int RanhLuongMax { get; set; }
-        
+
         public int EmployeeId { get; set; }
         [ForeignKey(nameof(EmployeeId))]
         [ValidateNever]

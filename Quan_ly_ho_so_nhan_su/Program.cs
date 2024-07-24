@@ -28,6 +28,16 @@ namespace Quan_ly_ho_so_nhan_su
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
             });
 
+            builder.Services.AddAuthentication().AddFacebook(options => {
+                options.AppId = "333789996460522";
+                options.AppSecret = "b10f1880dbb434dd8a1c3d31a5476ec5";
+            });
+
+            builder.Services.AddAuthentication().AddGoogle(options => {
+                options.ClientId = "713420101066-ph6r5oepgpgfg93kbqq5o5kcurcm1bij.apps.googleusercontent.com";
+                options.ClientSecret = "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";
+            });
+
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddScoped<IEmailSender, EmailSender>();
             builder.Services.AddRazorPages();

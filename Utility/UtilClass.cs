@@ -40,6 +40,31 @@ namespace Utility
             }
         }
 
+        public static string GetTaiSanCapPhatListByEmployeeId(int employeeId, IUnitOfWork unitOfWork)
+        {
+            var list = unitOfWork.EmployeeTaiSanCapPhatTable.GetAll(u => u.EmployeeId == employeeId, includeProperties: "TaiSanCapPhat").Select(t => t.TaiSanCapPhat.Name).ToArray();
+
+            return string.Join(", ", list);
+        }
+
+        public static string GetPhuCapListByEmployeeId(int employeeId, IUnitOfWork unitOfWork)
+        {
+            HoSoLuong hoSoLuong = unitOfWork.HoSoLuongTable.Get(u => u.EmployeeId == employeeId);
+
+            var list = unitOfWork.HoSoLuongPhuCapTable.GetAll(u => u.HoSoLuongId == hoSoLuong.Id, includeProperties: "PhuCap").Select(t => t.PhuCap.Name + ": " + t.Amount).ToArray();
+
+            return string.Join(", ", list);
+        }
+
+        public static string GetCheDoPhucLoiListByEmployeeId(int employeeId, IUnitOfWork unitOfWork)
+        {
+            HoSoLuong hoSoLuong = unitOfWork.HoSoLuongTable.Get(u => u.EmployeeId == employeeId);
+
+            var list = unitOfWork.HoSoLuongCheDoPhucLoiTable.GetAll(u => u.HoSoLuongId == hoSoLuong.Id, includeProperties: "CheDoPhucLoi").Select(t => t.CheDoPhucLoi.Name + ": " + t.Amount).ToArray();
+
+            return string.Join(", ", list);
+        }
+
         public static string GetDiaChiFull(int diaChiId, IUnitOfWork unitOfWork)
         {
             DiaChi diaChi = unitOfWork.DiaChiTable.Get(d => d.Id == diaChiId, includeProperties: "QuocGia,TinhThanh,QuanHuyen,XaPhuong");

@@ -49,16 +49,25 @@
                     </div>
                 }
 
-                @if (Model.HoSoLuong.Id == 0)
+                @foreach (int i in Model.PhucLoiDictionary.Keys)
                 {
                     <div class="form-floating col-6 py-2">
+                        <input asp-for="PhucLoiDictionary[i]" class="form-control border-0 shadow" />
+                        <label class="ms-2">Phúc lợi @Model.PhucLoiNameDictionary[i] (Nghìn đồng)</label>
+                        <span asp-validation-for="PhucLoiDictionary[i]" class="text-danger"></span>
+                    </div>
+                }
+
+                @if (Model.HoSoLuong.Id == 0)
+                {
+                    <div class="form-floating col-12 py-2">
                         <input asp-for="HoSoLuong.NguoiTao" class="form-control border-0 shadow" />
                         <label asp-for="HoSoLuong.NguoiTao" class="ms-2"></label>
                         <span asp-validation-for="HoSoLuong.NguoiTao" class="text-danger"></span>
                     </div>
                 } else
                 {
-                    <div class="form-floating col-6 py-2">
+                    <div class="form-floating col-12 py-2">
                         <input asp-for="HoSoLuong.NguoiUpdate" class="form-control border-0 shadow" />
                         <label asp-for="HoSoLuong.NguoiUpdate" class="ms-2"></label>
                         <span asp-validation-for="HoSoLuong.NguoiUpdate" class="text-danger"></span>

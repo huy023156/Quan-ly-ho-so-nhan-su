@@ -38,6 +38,7 @@ namespace DataAccess.Data
         public DbSet<HoSoLuong> HoSoLuongTable { get; set; }
         public DbSet<HoSoLuongCheDoPhucLoi> HoSoLuongCheDoPhucLoiTable { get; set; }
         public DbSet<HoSoLuongPhuCap> HoSoLuongPhuCapTable { get; set; }
+        public DbSet<EmployeeTaiSanCapPhat> EmployeeTaiSanCapPhatTable { get; set; }
 
         public DbSet<DiaChi> DiaChiTable { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -283,6 +284,17 @@ namespace DataAccess.Data
                     NguoiTao = "Admin",
                     NgayTao = DateTime.Now
                 }
+                );
+
+            modelBuilder.Entity<EmployeeTaiSanCapPhat>().HasData(
+                new EmployeeTaiSanCapPhat { Id = 1, EmployeeId = 1, TaiSanCapPhatId = 1, Amount = 1},
+                new EmployeeTaiSanCapPhat { Id = 2, EmployeeId = 1, TaiSanCapPhatId = 2, Amount = 1 },
+                new EmployeeTaiSanCapPhat { Id = 3, EmployeeId = 1, TaiSanCapPhatId = 3, Amount = 1 },
+                new EmployeeTaiSanCapPhat { Id = 4, EmployeeId = 1, TaiSanCapPhatId = 4, Amount = 3 },
+                new EmployeeTaiSanCapPhat { Id = 5, EmployeeId = 2, TaiSanCapPhatId = 1, Amount = 1 },
+                new EmployeeTaiSanCapPhat { Id = 6, EmployeeId = 2, TaiSanCapPhatId = 2, Amount = 1 },
+                new EmployeeTaiSanCapPhat { Id = 7, EmployeeId = 2, TaiSanCapPhatId = 3, Amount = 1 },
+                new EmployeeTaiSanCapPhat { Id = 8, EmployeeId = 2, TaiSanCapPhatId = 4, Amount = 2 }
                 );
         }
     }

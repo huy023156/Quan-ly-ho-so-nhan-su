@@ -19,6 +19,11 @@ namespace Models.ViewModels
         public Dictionary<int, int?> PhuCapDictionary { get; set; }
 
         [ValidateNever]
+        public Dictionary<int, string> PhucLoiNameDictionary { get; set; }
+        [ValidateNever]
+        public Dictionary<int, int?> PhucLoiDictionary { get; set; }
+
+        [ValidateNever]
         public IEnumerable<SelectListItem> EmployeeList { get; set; }
     }
 }
