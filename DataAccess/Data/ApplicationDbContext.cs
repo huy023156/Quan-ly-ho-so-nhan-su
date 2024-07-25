@@ -39,11 +39,38 @@ namespace DataAccess.Data
         public DbSet<HoSoLuongCheDoPhucLoi> HoSoLuongCheDoPhucLoiTable { get; set; }
         public DbSet<HoSoLuongPhuCap> HoSoLuongPhuCapTable { get; set; }
         public DbSet<EmployeeTaiSanCapPhat> EmployeeTaiSanCapPhatTable { get; set; }
+        public DbSet<DisciplinaryAction> DisciplinaryActionTable { get; set; }
+        public DbSet<Reward> RewardTable { get; set; }
 
         public DbSet<DiaChi> DiaChiTable { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<DisciplinaryAction>().HasData(
+                new DisciplinaryAction { 
+                    Id = 1, 
+                    EmployeeId = 1, 
+                    ViolationDate = new DateOnly(2024, 7, 20), 
+                    ViolationType="Late", 
+                    Description = "Arrived 30 minutes late",
+                    Evidence = "",
+                    ActionTakenType = "VerbalWarning",
+                    Remarks = ""
+                });
+
+            modelBuilder.Entity<Reward>().HasData(
+                new Reward
+                {
+                    Id = 1,
+                    EmployeeId = 1,
+                    RewardDate = new DateOnly(2024, 7, 24),
+                    Reason = "Exceed sales target",
+                    RewardType = "Bonus",
+                    Description = "$1000 bonus",
+                    Remarks = ""
+                });
+            
 
             modelBuilder.Entity<ChucDanh>().HasData(
                 new ChucDanh { Id = 1, Name = "Giám đốc trung tâm" },

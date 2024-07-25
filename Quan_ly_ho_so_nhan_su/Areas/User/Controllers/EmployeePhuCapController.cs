@@ -38,7 +38,7 @@ namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 				{
 					e.Id,
 					e.Name,
-					List = UtilClass.GetPhuCapListByEmployeeId(e.Id, _unitOfWork)
+					List = UtilClass.GetPhuCapListByEmployeeId(e.Id, _unitOfWork) 
 				});
 			return Json(new { data = employeeTaiSanCapPhatViewList });
 		}

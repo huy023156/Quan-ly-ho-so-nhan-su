@@ -34,7 +34,8 @@ namespace DataAccess.Repository
         public IHoSoLuongPhuCapRepository HoSoLuongPhuCapTable { get; private set; }
         public IHoSoLuongCheDoPhucLoiRepository HoSoLuongCheDoPhucLoiTable { get; private set; }
         public IEmployeeTaiSanCapPhatRepository EmployeeTaiSanCapPhatTable { get; private set; }
-
+        public IDisciplinaryActionRepository DisciplinaryActionTable { get; private set; }
+        public IRewardRepository RewardTable { get; private set; }
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -62,6 +63,8 @@ namespace DataAccess.Repository
             HoSoLuongPhuCapTable = new HoSoLuongPhuCapRepository(db);
             HoSoLuongCheDoPhucLoiTable = new HoSoLuongCheDoPhucLoiRepository(db);
             EmployeeTaiSanCapPhatTable = new EmployeeTaiSanCapPhatRepository(db);
+            DisciplinaryActionTable = new DisciplinaryActionRepository(db);
+            RewardTable = new RewardRepository(db);
         }
 
         public void Save()

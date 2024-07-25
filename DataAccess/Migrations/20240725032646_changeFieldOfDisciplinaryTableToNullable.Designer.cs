@@ -4,6 +4,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240725032646_changeFieldOfDisciplinaryTableToNullable")]
+    partial class changeFieldOfDisciplinaryTableToNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -574,7 +577,7 @@ namespace DataAccess.Migrations
                             Gender = true,
                             IsApplied = true,
                             Name = "Nguyen Quang Huy",
-                            NgayTao = new DateTime(2024, 7, 25, 10, 44, 9, 221, DateTimeKind.Local).AddTicks(1039),
+                            NgayTao = new DateTime(2024, 7, 25, 10, 26, 45, 855, DateTimeKind.Local).AddTicks(4878),
                             NguoiTao = "Admin",
                             PhoneNumber = "0369694076",
                             PhongBanId = 1
@@ -591,7 +594,7 @@ namespace DataAccess.Migrations
                             Gender = false,
                             IsApplied = true,
                             Name = "Nguyen Phuong Mai",
-                            NgayTao = new DateTime(2024, 7, 25, 10, 44, 9, 221, DateTimeKind.Local).AddTicks(1055),
+                            NgayTao = new DateTime(2024, 7, 25, 10, 26, 45, 855, DateTimeKind.Local).AddTicks(4892),
                             NguoiTao = "Admin",
                             PhoneNumber = "0123485682",
                             PhongBanId = 2
@@ -734,7 +737,7 @@ namespace DataAccess.Migrations
                             EmployeeId = 1,
                             IsApplied = true,
                             LuongCoBan = 20000,
-                            NgayTao = new DateTime(2024, 7, 25, 10, 44, 9, 221, DateTimeKind.Local).AddTicks(1095),
+                            NgayTao = new DateTime(2024, 7, 25, 10, 26, 45, 855, DateTimeKind.Local).AddTicks(4926),
                             NguoiTao = "Admin",
                             RanhLuongMax = 150000,
                             RanhLuongMin = 70000
@@ -746,7 +749,7 @@ namespace DataAccess.Migrations
                             EmployeeId = 2,
                             IsApplied = true,
                             LuongCoBan = 16000,
-                            NgayTao = new DateTime(2024, 7, 25, 10, 44, 9, 221, DateTimeKind.Local).AddTicks(1097),
+                            NgayTao = new DateTime(2024, 7, 25, 10, 26, 45, 855, DateTimeKind.Local).AddTicks(4928),
                             NguoiTao = "Admin",
                             RanhLuongMax = 100000,
                             RanhLuongMin = 50000
@@ -994,7 +997,7 @@ namespace DataAccess.Migrations
                             IsApplied = true,
                             NgayBatDau = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayKetThuc = new DateTime(2025, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2024, 7, 25, 10, 44, 9, 221, DateTimeKind.Local).AddTicks(1227),
+                            NgayTao = new DateTime(2024, 7, 25, 10, 26, 45, 855, DateTimeKind.Local).AddTicks(5054),
                             NguoiTao = "Admin",
                             QuyetDinhDetailId = 1
                         },
@@ -1007,7 +1010,7 @@ namespace DataAccess.Migrations
                             IsApplied = true,
                             NgayBatDau = new DateTime(2023, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayKetThuc = new DateTime(2025, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2024, 7, 25, 10, 44, 9, 221, DateTimeKind.Local).AddTicks(1230),
+                            NgayTao = new DateTime(2024, 7, 25, 10, 26, 45, 855, DateTimeKind.Local).AddTicks(5057),
                             NguoiTao = "Admin",
                             QuyetDinhDetailId = 2
                         });
@@ -1578,7 +1581,7 @@ namespace DataAccess.Migrations
                             NgayHetHieuLuc = new DateTime(2025, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayHieuLuc = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayQuyetDinh = new DateTime(2023, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2024, 7, 25, 10, 44, 9, 221, DateTimeKind.Local).AddTicks(1191),
+                            NgayTao = new DateTime(2024, 7, 25, 10, 26, 45, 855, DateTimeKind.Local).AddTicks(5021),
                             NguoiTao = "Admin",
                             NoiDung = "Tuyển dụng anh Huy vào vị trí Giám đốc",
                             QuyetDinhId = 1
@@ -1590,7 +1593,7 @@ namespace DataAccess.Migrations
                             NgayHetHieuLuc = new DateTime(2025, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayHieuLuc = new DateTime(2023, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayQuyetDinh = new DateTime(2023, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2024, 7, 25, 10, 44, 9, 221, DateTimeKind.Local).AddTicks(1194),
+                            NgayTao = new DateTime(2024, 7, 25, 10, 26, 45, 855, DateTimeKind.Local).AddTicks(5024),
                             NguoiTao = "Admin",
                             NoiDung = "Tuyển dụng chị Mai vào vị trí Phó giám đốc",
                             QuyetDinhId = 1
@@ -1606,6 +1609,7 @@ namespace DataAccess.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("EmployeeId")
@@ -1616,6 +1620,7 @@ namespace DataAccess.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Remarks")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateOnly>("RewardDate")

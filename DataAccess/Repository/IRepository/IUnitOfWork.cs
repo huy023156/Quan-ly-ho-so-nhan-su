@@ -31,6 +31,8 @@ namespace DataAccess.Repository.IRepository
         public IHoSoLuongPhuCapRepository HoSoLuongPhuCapTable { get; }
         public IHoSoLuongCheDoPhucLoiRepository HoSoLuongCheDoPhucLoiTable { get; }
         public IEmployeeTaiSanCapPhatRepository EmployeeTaiSanCapPhatTable { get; }
+        public IDisciplinaryActionRepository DisciplinaryActionTable { get; }
+        public IRewardRepository RewardTable { get; }
 
         void Save();
     }
