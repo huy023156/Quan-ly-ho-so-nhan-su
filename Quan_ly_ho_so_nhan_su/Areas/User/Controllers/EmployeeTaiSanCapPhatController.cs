@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 {
 	[Area("User")]
-	[Authorize]
-	public class EmployeeTaiSanCapPhatController : Controller
+    [Authorize(Roles = SD.ROLE_MANAGER + "," + SD.ROLE_ADMIN)]
+    public class EmployeeTaiSanCapPhatController : Controller
 	{
 		private readonly IUnitOfWork _unitOfWork;
 

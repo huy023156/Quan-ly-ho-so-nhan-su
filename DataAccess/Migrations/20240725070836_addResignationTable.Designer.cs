@@ -4,6 +4,7 @@ using DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240725070836_addResignationTable")]
+    partial class addResignationTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -526,11 +529,6 @@ namespace DataAccess.Migrations
                     b.Property<bool>("IsApplied")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsWorking")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -578,9 +576,8 @@ namespace DataAccess.Migrations
                             Email = "huy023156@gmail.com",
                             Gender = true,
                             IsApplied = true,
-                            IsWorking = false,
                             Name = "Nguyen Quang Huy",
-                            NgayTao = new DateTime(2024, 7, 26, 10, 59, 35, 316, DateTimeKind.Local).AddTicks(3610),
+                            NgayTao = new DateTime(2024, 7, 25, 14, 8, 35, 604, DateTimeKind.Local).AddTicks(580),
                             NguoiTao = "Admin",
                             PhoneNumber = "0369694076",
                             PhongBanId = 1
@@ -596,34 +593,12 @@ namespace DataAccess.Migrations
                             Email = "miaf@mai.com",
                             Gender = false,
                             IsApplied = true,
-                            IsWorking = false,
                             Name = "Nguyen Phuong Mai",
-                            NgayTao = new DateTime(2024, 7, 26, 10, 59, 35, 316, DateTimeKind.Local).AddTicks(3614),
+                            NgayTao = new DateTime(2024, 7, 25, 14, 8, 35, 604, DateTimeKind.Local).AddTicks(583),
                             NguoiTao = "Admin",
                             PhoneNumber = "0123485682",
                             PhongBanId = 2
                         });
-                });
-
-            modelBuilder.Entity("Models.EmployeeResignationDate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("EmployeeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateOnly>("ResignationDate")
-                        .HasColumnType("date");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EmployeeId");
-
-                    b.ToTable("EmployeeResignationDateTable");
                 });
 
             modelBuilder.Entity("Models.EmployeeTaiSanCapPhat", b =>
@@ -762,7 +737,7 @@ namespace DataAccess.Migrations
                             EmployeeId = 1,
                             IsApplied = true,
                             LuongCoBan = 20000,
-                            NgayTao = new DateTime(2024, 7, 26, 10, 59, 35, 316, DateTimeKind.Local).AddTicks(3646),
+                            NgayTao = new DateTime(2024, 7, 25, 14, 8, 35, 604, DateTimeKind.Local).AddTicks(616),
                             NguoiTao = "Admin",
                             RanhLuongMax = 150000,
                             RanhLuongMin = 70000
@@ -774,7 +749,7 @@ namespace DataAccess.Migrations
                             EmployeeId = 2,
                             IsApplied = true,
                             LuongCoBan = 16000,
-                            NgayTao = new DateTime(2024, 7, 26, 10, 59, 35, 316, DateTimeKind.Local).AddTicks(3649),
+                            NgayTao = new DateTime(2024, 7, 25, 14, 8, 35, 604, DateTimeKind.Local).AddTicks(618),
                             NguoiTao = "Admin",
                             RanhLuongMax = 100000,
                             RanhLuongMin = 50000
@@ -1022,7 +997,7 @@ namespace DataAccess.Migrations
                             IsApplied = true,
                             NgayBatDau = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayKetThuc = new DateTime(2025, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2024, 7, 26, 10, 59, 35, 316, DateTimeKind.Local).AddTicks(3766),
+                            NgayTao = new DateTime(2024, 7, 25, 14, 8, 35, 604, DateTimeKind.Local).AddTicks(737),
                             NguoiTao = "Admin",
                             QuyetDinhDetailId = 1
                         },
@@ -1035,7 +1010,7 @@ namespace DataAccess.Migrations
                             IsApplied = true,
                             NgayBatDau = new DateTime(2023, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayKetThuc = new DateTime(2025, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2024, 7, 26, 10, 59, 35, 316, DateTimeKind.Local).AddTicks(3769),
+                            NgayTao = new DateTime(2024, 7, 25, 14, 8, 35, 604, DateTimeKind.Local).AddTicks(740),
                             NguoiTao = "Admin",
                             QuyetDinhDetailId = 2
                         });
@@ -1606,7 +1581,7 @@ namespace DataAccess.Migrations
                             NgayHetHieuLuc = new DateTime(2025, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayHieuLuc = new DateTime(2023, 11, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayQuyetDinh = new DateTime(2023, 11, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2024, 7, 26, 10, 59, 35, 316, DateTimeKind.Local).AddTicks(3732),
+                            NgayTao = new DateTime(2024, 7, 25, 14, 8, 35, 604, DateTimeKind.Local).AddTicks(703),
                             NguoiTao = "Admin",
                             NoiDung = "Tuyển dụng anh Huy vào vị trí Giám đốc",
                             QuyetDinhId = 1
@@ -1618,7 +1593,7 @@ namespace DataAccess.Migrations
                             NgayHetHieuLuc = new DateTime(2025, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayHieuLuc = new DateTime(2023, 12, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             NgayQuyetDinh = new DateTime(2023, 12, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            NgayTao = new DateTime(2024, 7, 26, 10, 59, 35, 316, DateTimeKind.Local).AddTicks(3734),
+                            NgayTao = new DateTime(2024, 7, 25, 14, 8, 35, 604, DateTimeKind.Local).AddTicks(705),
                             NguoiTao = "Admin",
                             NoiDung = "Tuyển dụng chị Mai vào vị trí Phó giám đốc",
                             QuyetDinhId = 1
@@ -1647,15 +1622,6 @@ namespace DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateOnly>("ResignationDate")
-                        .HasColumnType("date");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(max)")
-                        .HasDefaultValue("Pending");
-
                     b.Property<DateOnly?>("UpdatedDate")
                         .HasColumnType("date");
 
@@ -1671,11 +1637,10 @@ namespace DataAccess.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateOnly(2024, 7, 26),
+                            CreatedDate = new DateOnly(2024, 7, 25),
                             EmployeeId = 3,
                             IdentityUserId = "70a0e26c-99c7-4d9a-9061-fe76029d4893",
-                            Reason = "Khong muon lam",
-                            ResignationDate = new DateOnly(1, 1, 1)
+                            Reason = "Khong muon lam"
                         });
                 });
 
@@ -2052,17 +2017,6 @@ namespace DataAccess.Migrations
                     b.Navigation("DiaChi");
 
                     b.Navigation("PhongBan");
-                });
-
-            modelBuilder.Entity("Models.EmployeeResignationDate", b =>
-                {
-                    b.HasOne("Models.Employee", "Employee")
-                        .WithMany()
-                        .HasForeignKey("EmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("Models.EmployeeTaiSanCapPhat", b =>

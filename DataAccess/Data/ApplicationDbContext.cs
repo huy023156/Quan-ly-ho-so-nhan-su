@@ -41,11 +41,32 @@ namespace DataAccess.Data
         public DbSet<EmployeeTaiSanCapPhat> EmployeeTaiSanCapPhatTable { get; set; }
         public DbSet<DisciplinaryAction> DisciplinaryActionTable { get; set; }
         public DbSet<Reward> RewardTable { get; set; }
-
         public DbSet<DiaChi> DiaChiTable { get; set; }
+        public DbSet<Resignation> ResignationTable { get; set; }
+        public DbSet<EmployeeResignationDate> EmployeeResignationDateTable { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Employee>()
+            .Property(e => e.IsWorking)
+            .HasDefaultValue(true);
+
+            modelBuilder.Entity<Resignation>()
+           .Property(e => e.Status)
+           .HasDefaultValue("Pending");
+
+            modelBuilder.Entity<Resignation>().HasData(
+                new Resignation
+                {
+                    Id = 1,
+                    EmployeeId = 3,
+                    IdentityUserId = "70a0e26c-99c7-4d9a-9061-fe76029d4893",
+                    Reason = "Khong muon lam",
+                    CreatedDate = new DateOnly(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day),
+                });
 
             modelBuilder.Entity<DisciplinaryAction>().HasData(
                 new DisciplinaryAction { 

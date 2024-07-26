@@ -36,6 +36,9 @@ namespace DataAccess.Repository
         public IEmployeeTaiSanCapPhatRepository EmployeeTaiSanCapPhatTable { get; private set; }
         public IDisciplinaryActionRepository DisciplinaryActionTable { get; private set; }
         public IRewardRepository RewardTable { get; private set; }
+        public IResignationRepository ResignationTable { get; private set; }
+        public IEmployeeResignationDateRepository EmployeeResignationDateTable { get; private set; }
+
         public UnitOfWork(ApplicationDbContext db)
         {
             _db = db;
@@ -65,6 +68,8 @@ namespace DataAccess.Repository
             EmployeeTaiSanCapPhatTable = new EmployeeTaiSanCapPhatRepository(db);
             DisciplinaryActionTable = new DisciplinaryActionRepository(db);
             RewardTable = new RewardRepository(db);
+            ResignationTable = new ResignationRepository(db);
+            EmployeeResignationDateTable = new EmployeeResignationDateRepository(db);
         }
 
         public void Save()

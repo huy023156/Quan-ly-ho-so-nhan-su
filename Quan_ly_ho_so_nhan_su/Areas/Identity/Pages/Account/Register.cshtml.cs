@@ -113,11 +113,10 @@ namespace Quan_ly_ho_so_nhan_su.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            var role = await _roleManager.FindByNameAsync(SD.ROLE_EMPLOYEE);
+            var role = await _roleManager.FindByNameAsync(SD.ROLE_MANAGER);
             if (role == null)
             {
-                await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_ADMIN));
-                await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_EMPLOYEE));
+                await _roleManager.CreateAsync(new IdentityRole(SD.ROLE_MANAGER));
             }
 
             Input = new()

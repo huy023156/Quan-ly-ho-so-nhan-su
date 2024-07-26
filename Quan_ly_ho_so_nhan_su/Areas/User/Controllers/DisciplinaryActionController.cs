@@ -9,7 +9,7 @@ using Utility;
 namespace Quan_ly_ho_so_nhan_su.Areas.User.Controllers
 {
     [Area("User")]
-    [Authorize]
+    [Authorize(Roles = SD.ROLE_MANAGER + "," + SD.ROLE_ADMIN)]
     public class DisciplinaryActionController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;

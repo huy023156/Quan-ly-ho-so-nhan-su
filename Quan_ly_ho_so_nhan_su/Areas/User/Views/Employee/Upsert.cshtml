@@ -12,6 +12,9 @@
 		<form method="post" class="row">
 			<input asp-for="Employee.Id" hidden />
 			<input asp-for="Employee.DiaChiId" hidden />
+			<input asp-for="Employee.NgayUpdate" hidden />
+			<input asp-for="Employee.NgayTao" hidden />
+			<input asp-for="Employee.IsWorking" hidden/>
 
 			@* <span asp-validation-sumary="ModelOnly"></span> *@
 
@@ -20,6 +23,11 @@
 					<input asp-for="Employee.Name" class="form-control border-0 shadow" />
 					<label asp-for="Employee.Name" class="ms-2"></label>
 					<span asp-validation-for="Employee.Name" class="text-danger"></span>
+				</div>
+				<div class="form-floating col-6 py-2">
+					<input asp-for="Employee.DateOfBirth" class="form-control border-0 shadow" type="datetime-local"/>
+					<label asp-for="Employee.DateOfBirth" class="ms-2"></label>
+					<span asp-validation-for="Employee.DateOfBirth" class="text-danger"></span>
 				</div>
 				<div class="form-floating col-6 py-2">
 					<input asp-for="Employee.DiaChiDetail" class="form-control border-0 shadow" />

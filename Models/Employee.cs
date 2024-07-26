@@ -45,6 +45,8 @@ namespace Models
         [ValidateNever]
         public ChucDanh ChucDanh { get; set; }
 
+        public bool IsWorking { get; set; }
+
         public DateTime? NgayTao { get; set; }
         public DateTime? NgayUpdate { get; set; }
         public string? NguoiTao { get; set; }

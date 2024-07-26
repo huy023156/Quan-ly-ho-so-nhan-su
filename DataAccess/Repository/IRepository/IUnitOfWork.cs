@@ -33,6 +33,8 @@ namespace DataAccess.Repository.IRepository
         public IEmployeeTaiSanCapPhatRepository EmployeeTaiSanCapPhatTable { get; }
         public IDisciplinaryActionRepository DisciplinaryActionTable { get; }
         public IRewardRepository RewardTable { get; }
+        public IResignationRepository ResignationTable { get; }
+        public IEmployeeResignationDateRepository EmployeeResignationDateTable { get; }
 
         void Save();
     }

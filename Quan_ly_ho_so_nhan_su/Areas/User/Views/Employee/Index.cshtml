@@ -25,6 +25,7 @@
                     <th>Email</th>
                     <th>Phòng ban</th>
                     <th>Chức danh</th>
+                    <th>Tình trạng</th>
                     <th>Trạng thái</th>
                     <th></th>
                 </tr>
@@ -52,6 +53,7 @@
                     { data: 'email', width: '10%' },
                     { data: 'phongBan', width: '10%' },
                     { data: 'chucDanh', width: '10%' },
+                    { data: 'isWorking', width: '10%'},
                     {
                         data: 'isApplied',
                         "render": function (data) {
@@ -70,7 +72,7 @@
                                                                 </a>
                                                     </div>`;
                         },
-                        width: '15%'
+                        width: '10%'
                     }
                 ]
             });

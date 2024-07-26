@@ -10,6 +10,7 @@ namespace Utility
     {
         public const string ROLE_ADMIN = "Admin";
         public const string ROLE_EMPLOYEE = "Employee";
+        public const string ROLE_MANAGER = "Manager";
 
         public enum ViolationType
         {
@@ -48,6 +49,13 @@ namespace Utility
             EmployeeOfTheMonth,
             CertificateOfRecognition,
             TrainingOpportunity
+        }
+
+        public enum Status
+        {
+            Pending,
+            Accepted,
+            Rejected
         }
     }
 }
